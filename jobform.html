@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Job</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #f4f4f4;
+      display: flex;
+    }
+    aside {
+      width: 80px;
+      background: #000;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    aside i {
+      color: #fff;
+      font-size: 24px;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    header input {
+      padding: 8px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .main-content {
+      margin-top: 40px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 700px;
+    }
+    .main-content h1 {
+      font-size: 19px;
+      margin-bottom: 20px;
+    }
+    .job-post-form h2 {
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px 30px; /* vertical and horizontal gap */
+  align-items: start;
+}
+
+form label {
+  margin-top: 0;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: 500;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 80px;
+  grid-column: span 2; /* Make textarea take full width */
+}
+
+form button {
+  grid-column: span 2; /* Button spans entire form width */
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  justify-self: start; /* Align left */
+}
+
+form button:hover {
+  background: #218838;
+}
+
+  </style>
+</head>
+<body>
+  <aside>
+    <div class="logo">LOGO</div>
+   <a href="dashboard.html" title="Home"> <i>🏠</i></a>
+   <a href="jobform.html" title="Post Job"><i>➕</i></a>
+   <a href="uloadedjobs.html" title="My Jobs"><i>📋</i></a>
+   <a href="application.html" title="Applications"><i>📨</i></a>
+   <a href="settings.html" title="Settings"><i>⚙️</i></a>
+  </aside>
+  <main>
+    <header>
+      <div>
+        <h1>Post a Job</h1>
+        <p>Fill out the details to publish a job listing</p>
+      </div>
+      <input type="text" placeholder="Search...">
+    </header>
+
+    <div class="main-content">
+      <h1>Upload a Job Post</h1>
+      <div class="job-post-form">
+        <h2>Post a New Job</h2>
+        <form id="jobForm">
+          <label for="title">Job Title</label>
+          <input type="text" id="title" name="title" placeholder="e.g., Frontend Developer" required>
+
+          <label for="company">Company Name</label>
+          <input type="text" id="company" name="company" placeholder="e.g., TechWave Pvt. Ltd." required>
+
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="e.g., Kathmandu, Nepal" required>
+
+          <label for="type">Job Type</label>
+          <select id="type" name="type">
+            <option value="fulltime">Full-Time</option>
+            <option value="parttime">Part-Time</option>
+            <option value="intern">Internship</option>
+            <option value="remote">Remote</option>
+          </select>
+
+          <label for="desc">Job Description</label>
+          <textarea id="desc" name="desc" rows="4" placeholder="Write a brief job description..." required></textarea>
+
+          <label for="salary">Salary (Optional)</label>
+          <input type="text" id="salary" name="salary" placeholder="e.g., NPR 40,000/month">
+
+          <button type="submit">Upload Job</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
