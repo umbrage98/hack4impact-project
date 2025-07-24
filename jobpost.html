@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobPost</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+     scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 80px;
+      background-color: #111;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      box-sizing: border-box;
+    }
+
+    .nav-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #00d9ff;
+    }
+
+    .bottom-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 10px;
+    }
+     a i {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  a:hover i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px white);
+  }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="nav-wrapper">
+      <div class="nav-icons">
+        <a href="dashboard.html" title="Home"><i class='bx bxs-home' style="color: white; font-size: 24px;"></i></a>
+        <a href="jobpost.html" title="Job Post"><i class='bx bxs-plus-circle' style="color: white; font-size: 24px;"></i></a>
+        <a href="viewjobs.html" title="View Own Job Post"><i class='bx bxs-file-doc' style="color: white; font-size: 24px;"></i></a>
+        <a href="applications.html" title="Applications"><i class='bx bxs-inbox' style="color: white; font-size: 24px;"></i></a>
+      </div>
+    </div>
+    <div class="bottom-icons">
+        <a href="settings.html" title="Settings"><i class='bx bxs-cog' style="color: white; font-size: 24px;"></i></a>
+        <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; padding: 30px 50px; box-sizing: border-box;">
+
+  <!-- LEFT SIDE (Welcome, Calendar, Uploaded Jobs) -->
+  <div>
+    <!-- Welcome Text -->
+    <div>
+      <h1 style="margin: 0; font-weight: 1500; font-size: 25px; color: #111; line-height: 1;">
+        POST
+      </h1>
+      <h3 style="margin: 10px 0 20px 0; font-weight: 600; font-size: 15px; color: #111; line-height: 1;">
+        Available jobs
+      </h3>
+    </div>
+
+
+  
+
+    <!-- Uploaded Jobs Card -->
+    <div style="
+      background: #fff;
+      padding: 25px;
+      border-radius: 5px;
+      box-shadow: 0 0 12px 3px rgba(128, 128, 128, 0.4);
+      border: 1px solid #ccc;
+      width: 410px;
+      font-size: 16px;
+      height: 6cm;
+    ">
+      <h2 style="font-size: 15px; margin-top: 0; margin-bottom: 10px;">Uploaded Jobs</h2>
+      <hr style="border: none; border-top: 1px solid #ccc; margin-bottom: 15px;">
+
+      <!-- Job Entries -->
+      <!-- Repeat this block for each job -->
+      <a href="job1.html" style="text-decoration: none; color: black; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center;">
+          <i class='bx bxs-briefcase' style="margin-right: 10px;"></i>
+          Frontend Developer
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <img src="pfp1.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <img src="pfp2.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <img src="pfp3.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <span style="font-size: 13px; color: gray;">+2</span>
+        </div>
+      </a>
+
+      <!-- Job 2 -->
+      <a href="job2.html" style="text-decoration: none; color: black; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center;">
+          <i class='bx bxs-briefcase' style="margin-right: 10px;"></i>
+          Marketing Executive
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <img src="pfp4.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <img src="pfp5.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <img src="pfp6.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <span style="font-size: 13px; color: gray;">+1</span>
+        </div>
+      </a>
+
+      <!-- Job 3 -->
+      <a href="job3.html" style="text-decoration: none; color: black; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center;">
+          <i class='bx bxs-briefcase' style="margin-right: 10px;"></i>
+          Content Writer
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <img src="pfp7.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <img src="pfp8.jpg" style="width: 20px; height: 20px; border-radius: 50%;" />
+          <span style="font-size: 13px; color: gray;">+4</span>
+        </div>
+      </a>
+
+      <hr style="border: none; border-top: 1px solid #ccc; margin: 15px 0;">
+      <a href="#jobform" style="
+        display: inline-block;
+        background-color: black;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+      ">+ Post Jobs</a>
+    </div>
+  </div>
+
+<div style="position: relative; width: 100%; padding-top: 30px; margin-left: 50px;">
+
+  <!-- Search bar centered top -->
+  <input
+    type="text"
+    placeholder="Search..."
+    style="
+    position: absolute;
+      display: block;
+      margin: -30px auto 0 auto;
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+      font-size: 15px;
+      width: 500px;
+      margin-bottom: 60px; /* add bottom margin to clear space below search bar */
+    "
+    onfocus="this.style.boxShadow='0 0 8px gray'"
+    onblur="this.style.boxShadow='none'"
+  >
+
+  <!-- Profile icon top right -->
+  <a href="profile.html" style="position: absolute; top: 0; right: 0;">
+    <i class='bx bxs-user-circle' style="font-size: 42px; color: black;"></i>
+  </a>
+
+  <!-- Cards container below search bar -->
+  <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 860px;">
+<div style="margin-top: 60px; display: flex; flex-direction: column; gap: 20px;">
+
+ <div style="
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
+  border: 1px solid #ccc;
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-top: -20px;
+  box-sizing: border-box;
+">
+  <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 20px;">Post a Job</h2>
+  <form style="display: flex; flex-direction: column; gap: 20px;">
+
+    <!-- Row 1 -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Job Title*</label>
+        <input id="jobform" type="text" required style="padding: 8px;">
+      </div>
+      <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Company Name*</label>
+        <input type="text" required style="padding: 8px;">
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Location*</label>
+        <input type="text" required style="padding: 8px;">
+      </div>
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Job Type*</label>
+        <select required style="padding: 8px;">
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Internship</option>
+          <option>Contract</option>
+        </select>
+      </div>
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Salary</label>
+        <input type="text" style="padding: 8px;">
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Deadline*</label>
+        <input type="date" required style="padding: 8px;">
+      </div>
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Experience*</label>
+        <input type="text" required placeholder="e.g. 1+ years" style="padding: 8px;">
+      </div>
+      <div style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px;">
+        <label>Vacancies*</label>
+        <input type="number" required min="1" style="padding: 8px;">
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label>Job Description*</label>
+      <textarea required rows="4" style="padding: 8px;"></textarea>
+    </div>
+
+    <!-- Requirements -->
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label>Requirements (Optional)</label>
+      <textarea rows="3" style="padding: 8px;"></textarea>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" style="
+      background-color: #00d9ff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      width: fit-content;
+      align-self: flex-start;
+    ">
+      Submit
+    </button>
+  </form>
+</div>
+
+  <div id="logoutModal" style="
+  display: none;  /* Remove the duplicate display:none */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+">
+  <div style="
+    background: white;
+    padding: 25px 30px;
+    border-radius: 8px;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  ">
+    <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">
+      Are you sure you want to logout?
+    </p>
+    <button id="confirmLogoutBtn" class="save-btn" style="margin-right: 12px;">Logout</button>
+    <button id="cancelLogoutBtn" class="save-btn" style="background: #ccc; color: #333;">Cancel</button>
+  </div>
+
+<script>
+  const logoutBtn = document.getElementById('logoutBtn');
+const logoutModal = document.getElementById('logoutModal');
+const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+
+logoutBtn.addEventListener('click', e => {
+  e.preventDefault();
+  logoutModal.style.display = 'flex';
+});
+
+cancelLogoutBtn.addEventListener('click', () => {
+  logoutModal.style.display = 'none';
+});
+
+confirmLogoutBtn.addEventListener('click', () => {
+  window.location.href = '/logout';
+});
+</script>
+
+
+
+</body>
+</html>

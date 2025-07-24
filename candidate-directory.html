@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Library</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 80px;
+      background-color: #111;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      box-sizing: border-box;
+    }
+
+    .nav-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #00d9ff;
+    }
+
+    .bottom-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 10px;
+    }
+    
+    a i {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    a:hover i {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px white);
+    }
+    
+    /* Candidate Directory Styles */
+    .candidate-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 60px;
+    }
+    
+    .directory-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .view-all {
+      color: #00d9ff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .candidate-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .candidate-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: calc(25% - 20px);
+      min-width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .candidate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .candidate-pic {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 2px solid #f0f0f0;
+    }
+    
+    .candidate-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .candidate-role {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .connect-btn {
+      background-color: #00d9ff;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    
+    .connect-btn:hover {
+      background-color: #00b8d9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="nav-wrapper">
+      <div class="nav-icons">
+        <a href="dashboard.html" title="Home"><i class='bx bxs-home' style="color: white; font-size: 24px;"></i></a>
+        <a href="jobpost.html" title="Job Post"><i class='bx bxs-plus-circle' style="color: white; font-size: 24px;"></i></a>
+        <a href="viewjobs.html" title="View Own Job Post"><i class='bx bxs-file-doc' style="color: white; font-size: 24px;"></i></a>
+        <a href="applications.html" title="Applications"><i class='bx bxs-inbox' style="color: white; font-size: 24px;"></i></a>
+      </div>
+    </div>
+    <div class="bottom-icons">
+        <a href="settings.html" title="Settings"><i class='bx bxs-cog' style="color: white; font-size: 24px;"></i></a>
+        <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
+    </div>
+  </div>
+
+  <div style="position: relative; width: 100%; padding: 30px 50px; box-sizing: border-box;">
+
+    <!-- Header Text -->
+    <div>
+      <h1 style="margin: 0; font-weight: 1500; font-size: 25px; color: #111; line-height: 1;">
+        CANDIDATE LIBRARY
+      </h1>
+      <h3 style="margin: 10px 0 20px 0; font-weight: 600; font-size: 15px; color: #111; line-height: 1;">
+        Browse and connect with top talent
+      </h3>
+    </div>
+
+    <!-- Search bar -->
+    <input
+      type="text"
+      placeholder="Search candidates..."
+      style="
+        position: absolute;
+        top: 30px;
+        right: 100px;
+        padding: 10px 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+        font-size: 15px;
+        width: 500px;
+      "
+      onfocus="this.style.boxShadow='0 0 8px gray'"
+      onblur="this.style.boxShadow='none'"
+    >
+
+    <!-- Profile icon -->
+    <a href="profile.html" style="position: absolute; top: 30px; right: 50px;">
+      <i class='bx bxs-user-circle' style="font-size: 42px; color: black;"></i>
+    </a>
+
+    <!-- Candidate Directory Section -->
+    <div class="candidate-container">
+      <div class="directory-header">
+        <h2 class="section-title">Top Candidates</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      
+      <div class="candidate-list">
+        <!-- Alice -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Alice" class="candidate-pic">
+          <h3 class="candidate-name">Alice</h3>
+          <p class="candidate-role">UX Designer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Michael -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael" class="candidate-pic">
+          <h3 class="candidate-name">Michael</h3>
+          <p class="candidate-role">DevOps Engineer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Sophia -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sophia" class="candidate-pic">
+          <h3 class="candidate-name">Sophia</h3>
+          <p class="candidate-role">HR Manager</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- David -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David" class="candidate-pic">
+          <h3 class="candidate-name">David</h3>
+          <p class="candidate-role">Backend Developer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Additional Candidates -->
+        <!-- Emma -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Emma" class="candidate-pic">
+          <h3 class="candidate-name">Emma</h3>
+          <p class="candidate-role">Product Manager</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- James -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="James" class="candidate-pic">
+          <h3 class="candidate-name">James</h3>
+          <p class="candidate-role">Data Scientist</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Olivia -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Olivia" class="candidate-pic">
+          <h3 class="candidate-name">Olivia</h3>
+          <p class="candidate-role">Frontend Developer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- William -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="William" class="candidate-pic">
+          <h3 class="candidate-name">William</h3>
+          <p class="candidate-role">Mobile Developer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Additional Candidates -->
+        <!-- Ava -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ava" class="candidate-pic">
+          <h3 class="candidate-name">Ava</h3>
+          <p class="candidate-role">Marketing Specialist</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Ethan -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Ethan" class="candidate-pic">
+          <h3 class="candidate-name">Ethan</h3>
+          <p class="candidate-role">Systems Architect</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Isabella -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Isabella" class="candidate-pic">
+          <h3 class="candidate-name">Isabella</h3>
+          <p class="candidate-role">Content Strategist</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+        
+        <!-- Noah -->
+        <div class="candidate-card">
+          <img src="https://randomuser.me/api/portraits/men/95.jpg" alt="Noah" class="candidate-pic">
+          <h3 class="candidate-name">Noah</h3>
+          <p class="candidate-role">QA Engineer</p>
+          <button class="connect-btn">Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="logoutModal" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  ">
+    <div style="
+      background: white;
+      padding: 25px 30px;
+      border-radius: 8px;
+      max-width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    ">
+      <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">
+        Are you sure you want to logout?
+      </p>
+      <button id="confirmLogoutBtn" class="save-btn" style="margin-right: 12px;">Logout</button>
+      <button id="cancelLogoutBtn" class="save-btn" style="background: #ccc; color: #333;">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+    const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+
+    logoutBtn.addEventListener('click', e => {
+      e.preventDefault();
+      logoutModal.style.display = 'flex';
+    });
+
+    cancelLogoutBtn.addEventListener('click', () => {
+      logoutModal.style.display = 'none';
+    });
+
+    confirmLogoutBtn.addEventListener('click', () => {
+      window.location.href = '/logout';
+    });
+  </script>
+
+</body>
+</html>
