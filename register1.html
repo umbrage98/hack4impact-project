@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Account Type - Kaam Ghar</title>
+  <link rel="shortcut icon" href="./assets/images/kaam.png" type="image/x-icon" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f6f6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #1a1a1a;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 40px;
+    }
+
+    .panels {
+      display: flex;
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    /* Hide radio inputs */
+    input[type="radio"] {
+      display: none;
+    }
+
+    /* Card styles */
+    label.card {
+      flex: 1;
+      background-color: #111;
+      border-radius: 12px;
+      padding: 60px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      border: 3px solid transparent;
+    }
+
+    /* Blue panel style */
+    label.card.employee {
+      background-color: #0a9396;
+      color: #111;
+    }
+
+    /* Logo styles */
+    label.card.business img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    
+      /* Blue tint */
+    }
+
+    label.card.employee img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: none; /* original */
+    }
+
+    /* Labels */
+    label.card h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-top: 0;
+    }
+
+    /* Hover effect */
+    label.card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.8);
+    }
+
+    /* Checked state */
+    input[type="radio"]:checked + label.card {
+      border-color: #5cff5c;
+      box-shadow: 0 0 20px 3px #5cff5c;
+      transform: translateY(-8px);
+      background-color: #222 !important;
+      color: #5cff5c !important;
+    }
+
+    input[type="radio"]:checked + label.card.employee {
+      background-color: #056a6b !important;
+      color: #5cff5c !important;
+      border-color: #5cff5c;
+      box-shadow: 0 0 20px 3px #5cff5c;
+      transform: translateY(-8px);
+    }
+
+    /* Register button */
+    .register-btn {
+      margin-top: 30px;
+      padding: 14px 50px;
+      background-color: #5cff5c;
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 10px rgba(92, 255, 92, 0.5);
+    }
+
+    .register-btn:hover:enabled {
+      background-color: #44cc44;
+      box-shadow: 0 6px 14px rgba(68, 204, 68, 0.6);
+    }
+
+    /* Disabled button */
+    .register-btn:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+      color: #aaa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .panels {
+        flex-direction: column;
+        border-radius: 16px;
+      }
+
+      label.card {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .register-btn {
+        width: 80%;
+        padding: 12px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="panels">
+      <input type="radio" id="business" name="accountType" value="business" />
+      <label for="business" class="card business" tabindex="0">
+        <img src="./assets/images/com.jpg" alt="Business Logo" />
+        <h2>Business</h2>
+      </label>
+
+      <input type="radio" id="employee" name="accountType" value="employee" />
+      <label for="employee" class="card employee" tabindex="0">
+        <img src="./assets/images/emp.jpg" alt="Employee Logo" />
+        <h2>Employee</h2>
+      </label>
+    </div>
+
+    <button id="registerBtn" class="register-btn" disabled><a href="/login.html"></a>Register</button>
+  </div>
+
+  <script>
+    // Enable register button only if an option is selected
+    const radios = document.querySelectorAll('input[name="accountType"]');
+    const registerBtn = document.getElementById('registerBtn');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        registerBtn.disabled = ![...radios].some(r => r.checked);
+      });
+    });
+
+    // Optional: Register button click handler
+    registerBtn.addEventListener('click', () => {
+      const selected = document.querySelector('input[name="accountType"]:checked');
+      if (!selected) return;
+
+      alert(`You selected: ${selected.value}. Proceeding to registration.`);
+      // Here you can redirect based on selection, for example:
+      // window.location.href = selected.value + '-register.html';
+    });
+  </script>
+
+</body>
+</html>
