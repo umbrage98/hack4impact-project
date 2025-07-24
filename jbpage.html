@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Job Listing - Kaam Ghar</title>
+  <title>Job Details - Kaam Ghar</title>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     rel="stylesheet"
@@ -154,84 +154,45 @@
     /* Main content */
     main {
       flex-grow: 1;
-      padding: 40px 60px;
-      background-color: #121212;
-    }
-    main h2 {
-      text-align: center;
-      color: #00bfa6;
-      margin-bottom: 30px;
-      letter-spacing: 1.2px;
-      user-select: none;
-    }
-
-    /* Job card container */
-    .job-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* bigger min width */
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Job card */
-    .job-card {
+      max-width: 900px;
+      margin: 40px auto;
       background-color: #000000;
-      border-radius: 14px;
-      padding: 35px; /* bigger padding */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       color: white;
-      position: relative;
     }
 
-    .job-card h3 {
-      margin-bottom: 12px;
+    main h2 {
       color: #5cff5c;
-      font-size: 24px; /* bigger font */
+      margin-bottom: 20px;
       user-select: none;
-    }
-
-    .job-card p {
-      margin-bottom: 14px;
-      font-size: 17px; /* bigger font */
-      user-select: none;
-    }
-
-    .credit-apply {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .credit {
+      font-size: 28px;
       font-weight: 700;
-      font-size: 18px; /* bigger font */
-      background-color: #222;
-      padding: 8px 16px; /* bigger padding */
-      border-radius: 20px;
+    }
+
+    .job-info p {
+      margin-bottom: 14px;
+      font-size: 17px;
+      line-height: 1.5;
       user-select: none;
     }
 
-    .apply-btn {
+    .apply-now-btn {
+      display: inline-block;
       background-color: #2ecc40;
       color: #121212;
-      border: none;
-      padding: 12px 22px; /* bigger padding */
-      border-radius: 25px;
+      padding: 14px 28px;
+      border-radius: 30px;
       font-weight: 700;
-      font-size: 17px; /* bigger font */
+      font-size: 18px;
+      text-decoration: none;
       cursor: pointer;
+      margin-top: 30px;
       transition: background-color 0.3s ease;
       user-select: none;
-      text-decoration: none;
-      text-align: center;
     }
-
-    .apply-btn:hover {
+    .apply-now-btn:hover {
       background-color: #28a230;
       color: white;
     }
@@ -281,68 +242,34 @@
   </header>
 
   <main>
-    <h2>Available Jobs</h2>
-    <div class="job-container">
-      <div class="job-card" style="order: 2;">
-        <h3>TechNepal Pvt. Ltd.</h3>
-        <p><strong>Job Title:</strong> Software Developer</p>
-        <p><strong>Salary:</strong> NPR 60,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 80</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 1;">
-        <h3>Innovate Solutions</h3>
-        <p><strong>Job Title:</strong> UX Designer</p>
-        <p><strong>Salary:</strong> NPR 50,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 90</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 3;">
-        <h3>Global Softwares</h3>
-        <p><strong>Job Title:</strong> Data Analyst</p>
-        <p><strong>Salary:</strong> NPR 55,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 70</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 4;">
-        <h3>Creative Apps</h3>
-        <p><strong>Job Title:</strong> Mobile App Developer</p>
-        <p><strong>Salary:</strong> NPR 65,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 60</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 5;">
-        <h3>NextGen Tech</h3>
-        <p><strong>Job Title:</strong> Project Manager</p>
-        <p><strong>Salary:</strong> NPR 70,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 75</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 6;">
-        <h3>Bright Minds Inc.</h3>
-        <p><strong>Job Title:</strong> QA Engineer</p>
-        <p><strong>Salary:</strong> NPR 52,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 65</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
+    <h2>Software Developer - TechNepal Pvt. Ltd.</h2>
+    <div class="job-info">
+      <p><strong>Location:</strong> Kathmandu, Nepal</p>
+      <p><strong>Salary:</strong> NPR 60,000/month</p>
+      <p><strong>Job Type:</strong> Full-time</p>
+      <p><strong>Experience Required:</strong> 2+ years</p>
+      <p><strong>Industry:</strong> IT & Software</p>
+      <p><strong>Job Description:</strong><br />
+        We are looking for a passionate Software Developer to join our team. The ideal candidate
+        will have experience in web development, good problem-solving skills, and the ability to
+        work in a collaborative environment.
+      </p>
+      <p><strong>Responsibilities:</strong></p>
+      <ul>
+        <li>Develop and maintain web applications.</li>
+        <li>Collaborate with cross-functional teams.</li>
+        <li>Write clean, scalable, and efficient code.</li>
+        <li>Troubleshoot and debug software issues.</li>
+      </ul>
+      <p><strong>Qualifications:</strong></p>
+      <ul>
+        <li>Bachelor's degree in Computer Science or related field.</li>
+        <li>Experience with JavaScript, HTML, CSS, and backend technologies.</li>
+        <li>Strong communication skills.</li>
+      </ul>
     </div>
+
+    <a href="job-apply.html" class="apply-now-btn">Apply Now</a>
   </main>
 
   <script>

@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Job Listing - Kaam Ghar</title>
+  <title>Job Application - Kaam Ghar</title>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     rel="stylesheet"
   />
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: 'Segoe UI', sans-serif;
     }
     body {
       background-color: #121212;
-      color: white;
+      color: #5cff5c;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -31,7 +29,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
       position: relative;
       z-index: 10;
     }
@@ -104,7 +102,7 @@
       transition: background-color 0.3s;
     }
     .navbar-right .profile-pic:hover {
-      background-color: #00a58c;
+      background-color: #008f82;
     }
     .notification-dropdown {
       position: absolute;
@@ -154,85 +152,101 @@
     /* Main content */
     main {
       flex-grow: 1;
-      padding: 40px 60px;
-      background-color: #121212;
-    }
-    main h2 {
-      text-align: center;
-      color: #00bfa6;
-      margin-bottom: 30px;
-      letter-spacing: 1.2px;
-      user-select: none;
-    }
-
-    /* Job card container */
-    .job-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* bigger min width */
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Job card */
-    .job-card {
+      max-width: 1000px; /* increased */
+      margin: 40px auto;
       background-color: #000000;
-      border-radius: 14px;
-      padding: 35px; /* bigger padding */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      color: #5cff5c;
+    }
+
+    main h2 {
+      margin-bottom: 30px;
+      user-select: none;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      color: #5cff5c;
+    }
+
+    form {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      color: white;
-      position: relative;
+      gap: 18px;
     }
 
-    .job-card h3 {
-      margin-bottom: 12px;
+    label {
+      font-weight: 600;
+      font-size: 16px;
+      user-select: none;
       color: #5cff5c;
-      font-size: 24px; /* bigger font */
-      user-select: none;
     }
 
-    .job-card p {
-      margin-bottom: 14px;
-      font-size: 17px; /* bigger font */
-      user-select: none;
-    }
-
-    .credit-apply {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .credit {
-      font-weight: 700;
-      font-size: 18px; /* bigger font */
-      background-color: #222;
-      padding: 8px 16px; /* bigger padding */
-      border-radius: 20px;
-      user-select: none;
-    }
-
-    .apply-btn {
-      background-color: #2ecc40;
-      color: #121212;
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    input[type="file"] {
+      padding: 10px 12px;
+      border-radius: 8px;
       border: none;
-      padding: 12px 22px; /* bigger padding */
-      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      background-color: #121212;
+      color: #5cff5c;
+      transition: background-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    input[type="file"]:focus {
+      background-color: #008f82;
+      color: #d0f0c0;
+    }
+
+    .small-input-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .small-input-group input[type="number"] {
+      width: 80px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      background-color: #121212;
+      color: #5cff5c;
+      transition: background-color 0.3s ease;
+    }
+    .small-input-group input[type="number"]:focus {
+      background-color: #008f82;
+      color: #d0f0c0;
+    }
+
+    .small-input-group select {
+      flex: 1;
+    }
+
+    button[type="submit"] {
+      background-color: #5cff5c;
+      border: none;
+      padding: 15px 0;
+      border-radius: 30px;
       font-weight: 700;
-      font-size: 17px; /* bigger font */
+      font-size: 18px;
+      color: #121212;
       cursor: pointer;
       transition: background-color 0.3s ease;
       user-select: none;
-      text-decoration: none;
-      text-align: center;
+      margin-top: 20px;
     }
-
-    .apply-btn:hover {
-      background-color: #28a230;
+    button[type="submit"]:hover {
+      background-color: #40b367;
       color: white;
     }
   </style>
@@ -281,72 +295,60 @@
   </header>
 
   <main>
-    <h2>Available Jobs</h2>
-    <div class="job-container">
-      <div class="job-card" style="order: 2;">
-        <h3>TechNepal Pvt. Ltd.</h3>
-        <p><strong>Job Title:</strong> Software Developer</p>
-        <p><strong>Salary:</strong> NPR 60,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 80</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
+    <h2>Job Application Form</h2>
+    <form action="#" method="POST" enctype="multipart/form-data">
+      <label for="fullname">Full Name *</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Your full name" required />
+
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" placeholder="+977-XXXXXXXXXX" required />
+
+      <label for="username">Username *</label>
+      <input type="text" id="username" name="username" placeholder="Username" required />
+
+      <label for="education">Education *</label>
+      <select id="education" name="education" required>
+        <option value="" disabled selected>Select your highest education</option>
+        <option value="highschool">High School</option>
+        <option value="bachelor">Bachelor's Degree</option>
+        <option value="master">Master's Degree</option>
+        <option value="phd">PhD</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label>Experience *</label>
+      <div class="small-input-group">
+        <input
+          type="number"
+          id="experience-number"
+          name="experience-number"
+          min="0"
+          placeholder="0"
+          required
+        />
+        <select id="experience-unit" name="experience-unit" required>
+          <option value="year" selected>Year(s)</option>
+          <option value="month">Month(s)</option>
+        </select>
       </div>
 
-      <div class="job-card" style="order: 1;">
-        <h3>Innovate Solutions</h3>
-        <p><strong>Job Title:</strong> UX Designer</p>
-        <p><strong>Salary:</strong> NPR 50,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 90</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
+      <label for="industry">Industry *</label>
+      <input type="text" id="industry" name="industry" placeholder="Your industry" required />
 
-      <div class="job-card" style="order: 3;">
-        <h3>Global Softwares</h3>
-        <p><strong>Job Title:</strong> Data Analyst</p>
-        <p><strong>Salary:</strong> NPR 55,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 70</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
+      <label for="skills">Skills *</label>
+      <input type="text" id="skills" name="skills" placeholder="Comma separated skills" required />
 
-      <div class="job-card" style="order: 4;">
-        <h3>Creative Apps</h3>
-        <p><strong>Job Title:</strong> Mobile App Developer</p>
-        <p><strong>Salary:</strong> NPR 65,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 60</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
+      <label for="cv">Upload CV *</label>
+      <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required />
 
-      <div class="job-card" style="order: 5;">
-        <h3>NextGen Tech</h3>
-        <p><strong>Job Title:</strong> Project Manager</p>
-        <p><strong>Salary:</strong> NPR 70,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 75</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 6;">
-        <h3>Bright Minds Inc.</h3>
-        <p><strong>Job Title:</strong> QA Engineer</p>
-        <p><strong>Salary:</strong> NPR 52,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 65</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-    </div>
+      <button type="submit">Submit Application</button>
+    </form>
   </main>
 
   <script>
-    // Notification dropdown toggle
     const bell = document.getElementById('notificationBell');
     const dropdown = document.getElementById('notificationDropdown');
 
@@ -354,7 +356,6 @@
       dropdown.classList.toggle('active');
     });
 
-    // Close dropdown when clicking outside
     window.addEventListener('click', (e) => {
       if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
         dropdown.classList.remove('active');

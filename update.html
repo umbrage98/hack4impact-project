@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Job Listing - Kaam Ghar</title>
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    rel="stylesheet"
-  />
+  <title>Application Status - Kaam Ghar</title>
   <style>
-    /* Reset and base */
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
     }
+
     body {
       background-color: #121212;
       color: white;
@@ -24,7 +22,7 @@
       flex-direction: column;
     }
 
-    /* Navbar */
+    /* Top navigation bar */
     .navbar {
       background-color: #1a1a1a;
       display: flex;
@@ -35,28 +33,34 @@
       position: relative;
       z-index: 10;
     }
+
+    /* Left section */
     .navbar-left {
       display: flex;
       align-items: center;
       gap: 25px;
     }
+
     .navbar-left .logo {
       display: flex;
       align-items: center;
       gap: 10px;
       cursor: pointer;
     }
+
     .navbar-left .logo img {
       height: 40px;
       width: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
+
     .navbar-left .logo h1 {
       font-size: 22px;
       color: #5cff5c;
       user-select: none;
     }
+
     .navbar-left nav a {
       color: white;
       text-decoration: none;
@@ -67,16 +71,20 @@
       transition: background-color 0.3s;
       user-select: none;
     }
+
     .navbar-left nav a:hover {
       background-color: #00bfa6;
       color: #121212;
     }
+
+    /* Right section */
     .navbar-right {
       display: flex;
       align-items: center;
       gap: 20px;
       position: relative;
     }
+
     .navbar-right .icon {
       cursor: pointer;
       position: relative;
@@ -85,9 +93,12 @@
       user-select: none;
       transition: color 0.3s;
     }
+
     .navbar-right .icon:hover {
       color: #00bfa6;
     }
+
+    /* Profile circle */
     .navbar-right .profile-pic {
       height: 40px;
       width: 40px;
@@ -103,9 +114,12 @@
       user-select: none;
       transition: background-color 0.3s;
     }
+
     .navbar-right .profile-pic:hover {
       background-color: #00a58c;
     }
+
+    /* Notification dropdown */
     .notification-dropdown {
       position: absolute;
       top: 50px;
@@ -120,9 +134,11 @@
       display: none;
       z-index: 20;
     }
+
     .notification-dropdown.active {
       display: block;
     }
+
     .notification-dropdown h3 {
       padding: 12px 16px;
       border-bottom: 1px solid #00bfa6;
@@ -130,6 +146,7 @@
       color: #00bfa6;
       user-select: none;
     }
+
     .notification-item {
       padding: 12px 16px;
       border-bottom: 1px solid #333;
@@ -139,24 +156,29 @@
       cursor: default;
       user-select: none;
     }
+
     .notification-item:last-child {
       border-bottom: none;
     }
+
     .accepted {
       color: #4caf50;
       font-weight: 700;
     }
+
     .rejected {
       color: #f44336;
       font-weight: 700;
     }
 
-    /* Main content */
+    /* Main content container */
     main {
       flex-grow: 1;
       padding: 40px 60px;
       background-color: #121212;
     }
+
+    /* Page heading */
     main h2 {
       text-align: center;
       color: #00bfa6;
@@ -165,78 +187,55 @@
       user-select: none;
     }
 
-    /* Job card container */
-    .job-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* bigger min width */
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Job card */
-    .job-card {
-      background-color: #000000;
-      border-radius: 14px;
-      padding: 35px; /* bigger padding */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    /* Table styles */
+    table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      border: 3px solid #444;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      background-color: #1e1e1e;
       color: white;
-      position: relative;
     }
 
-    .job-card h3 {
-      margin-bottom: 12px;
-      color: #5cff5c;
-      font-size: 24px; /* bigger font */
-      user-select: none;
-    }
-
-    .job-card p {
-      margin-bottom: 14px;
-      font-size: 17px; /* bigger font */
-      user-select: none;
-    }
-
-    .credit-apply {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .credit {
-      font-weight: 700;
-      font-size: 18px; /* bigger font */
-      background-color: #222;
-      padding: 8px 16px; /* bigger padding */
-      border-radius: 20px;
-      user-select: none;
-    }
-
-    .apply-btn {
-      background-color: #2ecc40;
-      color: #121212;
-      border: none;
-      padding: 12px 22px; /* bigger padding */
-      border-radius: 25px;
-      font-weight: 700;
-      font-size: 17px; /* bigger font */
-      cursor: pointer;
+    th,
+    td {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 16px;
+      vertical-align: middle;
+      border-right: 2px solid #555;
       transition: background-color 0.3s ease;
       user-select: none;
-      text-decoration: none;
-      text-align: center;
     }
 
-    .apply-btn:hover {
-      background-color: #28a230;
-      color: white;
+    th {
+      background-color: #2a2a2a;
+      border-bottom: 3px solid #00bfa6;
+      font-weight: 700;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:hover {
+      background-color: #333;
+      cursor: default;
     }
   </style>
+  <!-- Icons from CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
 </head>
+
 <body>
   <header class="navbar">
     <div class="navbar-left">
@@ -248,7 +247,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="contact.html">Contact</a>
-        <a href="jobs.html">Job Listing</a>
+        <a href="jobs.html">Job</a>
       </nav>
     </div>
 
@@ -281,72 +280,41 @@
   </header>
 
   <main>
-    <h2>Available Jobs</h2>
-    <div class="job-container">
-      <div class="job-card" style="order: 2;">
-        <h3>TechNepal Pvt. Ltd.</h3>
-        <p><strong>Job Title:</strong> Software Developer</p>
-        <p><strong>Salary:</strong> NPR 60,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 80</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 1;">
-        <h3>Innovate Solutions</h3>
-        <p><strong>Job Title:</strong> UX Designer</p>
-        <p><strong>Salary:</strong> NPR 50,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 90</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 3;">
-        <h3>Global Softwares</h3>
-        <p><strong>Job Title:</strong> Data Analyst</p>
-        <p><strong>Salary:</strong> NPR 55,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 70</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 4;">
-        <h3>Creative Apps</h3>
-        <p><strong>Job Title:</strong> Mobile App Developer</p>
-        <p><strong>Salary:</strong> NPR 65,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 60</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 5;">
-        <h3>NextGen Tech</h3>
-        <p><strong>Job Title:</strong> Project Manager</p>
-        <p><strong>Salary:</strong> NPR 70,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 75</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-
-      <div class="job-card" style="order: 6;">
-        <h3>Bright Minds Inc.</h3>
-        <p><strong>Job Title:</strong> QA Engineer</p>
-        <p><strong>Salary:</strong> NPR 52,000/month</p>
-        <div class="credit-apply">
-          <div class="credit">Credit: 65</div>
-          <a href="job-details.html" class="apply-btn">Apply</a>
-        </div>
-      </div>
-    </div>
+    <h2>Application Status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 6%;">SN</th>
+          <th style="width: 62%;">Company Name</th>
+          <th style="width: 32%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>TechNepal Pvt. Ltd.</td>
+          <td class="accepted">Accepted</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Innovate Solutions</td>
+          <td class="rejected">Rejected</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Global Softwares</td>
+          <td class="accepted">Accepted</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Creative Apps</td>
+          <td class="rejected">Rejected</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
 
   <script>
-    // Notification dropdown toggle
     const bell = document.getElementById('notificationBell');
     const dropdown = document.getElementById('notificationDropdown');
 
@@ -362,4 +330,5 @@
     });
   </script>
 </body>
+
 </html>
