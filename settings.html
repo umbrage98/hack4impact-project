@@ -258,7 +258,6 @@
     <div class="settings-group">
       <h3>Updates</h3>
       <div class="menu-item" data-target="update-kyc">Update KYC</div>
-      <div class="menu-item" data-target="your-cv">Your CV</div>
     </div>
 
     <div class="settings-group">
@@ -475,62 +474,6 @@
   </form>
 </section>
 
-
-
-
-    <section id="your-cv" aria-label="Your CV">
-  <h3>Your CV</h3>
-  <p>Upload your CV as a photo or PDF file. You can preview it below after uploading.</p>
-
-  <form style="max-width: 500px; display: flex; flex-direction: column; gap: 15px;">
-    <label for="cvUpload">Upload CV (Image or PDF)*</label>
-    <input id="cvUpload" type="file" accept="image/*,application/pdf" required />
-
-    <div id="cvPreview" style="border: 1px solid #ccc; padding: 10px; border-radius: 6px; min-height: 150px;">
-      <p style="color: #888;">No CV uploaded yet.</p>
-    </div>
-
-    <button type="submit" class="save-btn">Save CV</button>
-  </form>
-</section>
-
-
-
-<script>
-  const cvUpload = document.getElementById('cvUpload');
-  const cvPreview = document.getElementById('cvPreview');
-
-  cvUpload.addEventListener('change', () => {
-    const file = cvUpload.files[0];
-    if (!file) {
-      cvPreview.innerHTML = '<p style="color: #888;">No CV uploaded yet.</p>';
-      return;
-    }
-
-    const fileType = file.type;
-    cvPreview.innerHTML = '';
-
-    if (fileType === 'application/pdf') {
-      // Show PDF preview using iframe
-      const iframe = document.createElement('iframe');
-      iframe.src = URL.createObjectURL(file);
-      iframe.style.width = '100%';
-      iframe.style.height = '300px';
-      iframe.style.border = 'none';
-      cvPreview.appendChild(iframe);
-    } else if (fileType.startsWith('image/')) {
-      // Show image preview
-      const img = document.createElement('img');
-      img.src = URL.createObjectURL(file);
-      img.style.maxWidth = '100%';
-      img.style.maxHeight = '300px';
-      img.style.borderRadius = '6px';
-      cvPreview.appendChild(img);
-    } else {
-      cvPreview.innerHTML = '<p style="color: red;">Unsupported file type.</p>';
-    }
-  });
-</script>
 
 <section id="logout" aria-label="Logout">
   <h3>Logout</h3>
