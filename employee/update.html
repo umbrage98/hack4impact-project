@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Application Status - Kaam Ghar</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top navigation bar */
+    .navbar {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Left section */
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .navbar-left .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .navbar-left .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar-left .logo h1 {
+      font-size: 22px;
+      color: #5cff5c;
+      user-select: none;
+    }
+
+    .navbar-left nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    .navbar-left nav a:hover {
+      background-color: #00bfa6;
+      color: #121212;
+    }
+
+    /* Right section */
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .navbar-right .icon {
+      cursor: pointer;
+      position: relative;
+      color: white;
+      font-size: 22px;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .navbar-right .icon:hover {
+      color: #00bfa6;
+    }
+
+    /* Profile circle */
+    .navbar-right .profile-pic {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #00bfa6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #121212;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .navbar-right .profile-pic:hover {
+      background-color: #00a58c;
+    }
+
+    /* Notification dropdown */
+    .notification-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #1e1e1e;
+      border: 2px solid #00bfa6;
+      border-radius: 10px;
+      width: 320px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      display: none;
+      z-index: 20;
+    }
+
+    .notification-dropdown.active {
+      display: block;
+    }
+
+    .notification-dropdown h3 {
+      padding: 12px 16px;
+      border-bottom: 1px solid #00bfa6;
+      font-weight: 700;
+      color: #00bfa6;
+      user-select: none;
+    }
+
+    .notification-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
+      user-select: none;
+    }
+
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+
+    .accepted {
+      color: #4caf50;
+      font-weight: 700;
+    }
+
+    .rejected {
+      color: #f44336;
+      font-weight: 700;
+    }
+
+    /* Main content container */
+    main {
+      flex-grow: 1;
+      padding: 40px 60px;
+      background-color: #121212;
+    }
+
+    /* Page heading */
+    main h2 {
+      text-align: center;
+      color: #00bfa6;
+      margin-bottom: 30px;
+      letter-spacing: 1.2px;
+      user-select: none;
+    }
+
+    /* Table styles */
+    table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      border: 3px solid #444;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+      background-color: #1e1e1e;
+      color: white;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 16px;
+      vertical-align: middle;
+      border-right: 2px solid #555;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    th {
+      background-color: #2a2a2a;
+      border-bottom: 3px solid #00bfa6;
+      font-weight: 700;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:hover {
+      background-color: #333;
+      cursor: default;
+    }
+  </style>
+  <!-- Icons from CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo" onclick="window.location.href='home.html'">
+        <img src="../assets/images/kaam.png" alt="Kaam Ghar Logo" />
+        <h1>Kaam Ghar</h1>
+      </div>
+      <nav>
+        <a href="./home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="update.html">Job Applied</a>
+      </nav>
+    </div>
+
+    <div class="navbar-right">
+      <div id="notificationBell" class="icon" title="Notifications">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="profile-pic" title="Profile" onclick="window.location.href='profile.html'">SD</div>
+
+      <div id="notificationDropdown" class="notification-dropdown">
+        <h3>Application Results</h3>
+        <div class="notification-item">
+          <span>TechNepal Pvt. Ltd.</span>
+          <span class="accepted">Accepted</span>
+        </div>
+        <div class="notification-item">
+          <span>Innovate Solutions</span>
+          <span class="rejected">Rejected</span>
+        </div>
+        <div class="notification-item">
+          <span>Global Softwares</span>
+          <span class="accepted">Accepted</span>
+        </div>
+        <div class="notification-item">
+          <span>Creative Apps</span>
+          <span class="rejected">Rejected</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h2>Application Status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 6%;">SN</th>
+          <th style="width: 62%;">Company Name</th>
+          <th style="width: 32%;">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const bell = document.getElementById('notificationBell');
+    const dropdown = document.getElementById('notificationDropdown');
+
+    bell.addEventListener('click', () => {
+      dropdown.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+      if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    }); document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('token'); // Your JWT token
+
+      if (!token) {
+        alert("Please login to view your applications.");
+        window.location.href = '/login.html';  // Redirect if not logged in
+        return;
+      }
+
+      try {
+        const response = await fetch('http://127.0.0.1:8000/applications/applications/my/', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch applications');
+        }
+
+        const applications = await response.json();
+
+        const tbody = document.querySelector('table tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        if (applications.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">No applications found.</td></tr>`;
+          return;
+        }
+
+        applications.forEach((app, index) => {
+          const tr = document.createElement('tr');
+
+          // Assuming app.job has company name inside job details
+          // Adjust property names based on your ApplicationDetailSerializer
+          const companyName = app.job.company_name || app.job.title || 'Unknown Company';
+          const statusClass = app.status === 'accepted' ? 'accepted' : (app.status === 'rejected' ? 'rejected' : '');
+
+          tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${companyName}</td>
+        <td class="${statusClass}">${app.status ? app.status.charAt(0).toUpperCase() + app.status.slice(1) : 'Pending'}</td>
+      `;
+
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        console.error('Error fetching applications:', error);
+        alert('Error loading applications. Please try again later.');
+      }
+    });
+
+  </script>
+</body>
+
+</html>

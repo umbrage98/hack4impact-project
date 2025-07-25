@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - Kaam Ghar</title>
+  <link rel="stylesheet" href="./assets/css/register.css" />
+  <link rel="shortcut icon" href="./assets/images/kaam.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <div class="logo">
+        <img src="./assets/images/kaam.png" alt="Logo" />
+        <h2>Kaam Ghar</h2>
+      </div>
+    </div>
+
+    <div class="middle-panel">
+      <h2>Register</h2>
+      <p>Create your account below</p>
+      <form id="registerForm">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="email" id="email" placeholder="Email address" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit" class="btn">Next step</button>
+      </form>
+
+    </div>
+  </div>
+</body>
+<script>
+  document.getElementById('registerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const userData = {
+      username: document.getElementById('username').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+    };
+
+    // Save to localStorage
+    localStorage.setItem('regUserData', JSON.stringify(userData));
+
+    // Go to next page
+    window.location.href = "/register1.html";
+  });
+</script>
+
+</html>

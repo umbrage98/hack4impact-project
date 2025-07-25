@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: #0e0e0e;
+      color: #e0e0e0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #000000, #002244);
+      padding: 60px 20px;
+      text-align: center;
+      color: #00aaff;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #bbb;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .contact-box {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.15);
+    }
+
+    .contact-box h2 {
+      color: #00aaff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input,
+    textarea {
+      padding: 12px 15px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #121212;
+      color: #fff;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #00aaff;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      background: #00aaff;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0088cc;
+    }
+
+    .info {
+      margin-top: 40px;
+      color: #ccc;
+    }
+
+    .info p {
+      margin: 10px 0;
+    }
+
+    footer {
+      background: #000;
+      color: #00aaff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .contact-box h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Contact Us</h1>
+    <p>Let’s get in touch — we’re here to help!</p>
+  </header>
+
+  <div class="container">
+    <div class="contact-box">
+      <h2>Send Us a Message</h2>
+      <form action="#" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="subject" placeholder="Subject" />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <div class="info">
+        <p><strong>Email:</strong> contact@yourdomain.com</p>
+        <p><strong>Phone:</strong> +977-9876543210</p>
+        <p><strong>Location:</strong> Imadol, Lalitpur, Nepal</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Your Company. All rights reserved.
+  </footer>
+
+</body>
+
+</html>

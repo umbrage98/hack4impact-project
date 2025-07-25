@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Details - Kaam Ghar</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .navbar-left .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .navbar-left .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar-left .logo h1 {
+      font-size: 22px;
+      color: #5cff5c;
+      user-select: none;
+    }
+
+    .navbar-left nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    .navbar-left nav a:hover {
+      background-color: #00bfa6;
+      color: #121212;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .navbar-right .icon {
+      cursor: pointer;
+      position: relative;
+      color: white;
+      font-size: 22px;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .navbar-right .icon:hover {
+      color: #00bfa6;
+    }
+
+    .navbar-right .profile-pic {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #00bfa6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #121212;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .navbar-right .profile-pic:hover {
+      background-color: #00a58c;
+    }
+
+    .notification-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #1e1e1e;
+      border: 2px solid #00bfa6;
+      border-radius: 10px;
+      width: 320px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      display: none;
+      z-index: 20;
+    }
+
+    .notification-dropdown.active {
+      display: block;
+    }
+
+    .notification-dropdown h3 {
+      padding: 12px 16px;
+      border-bottom: 1px solid #00bfa6;
+      font-weight: 700;
+      color: #00bfa6;
+      user-select: none;
+    }
+
+    .notification-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
+      user-select: none;
+    }
+
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+
+    .accepted {
+      color: #4caf50;
+      font-weight: 700;
+    }
+
+    .rejected {
+      color: #f44336;
+      font-weight: 700;
+    }
+
+    .pending {
+      color: #ffa500;
+      font-weight: 700;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #000000;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      color: white;
+    }
+
+    main h2 {
+      color: #5cff5c;
+      margin-bottom: 20px;
+      user-select: none;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .job-info p {
+      margin-bottom: 14px;
+      font-size: 17px;
+      line-height: 1.5;
+      user-select: none;
+    }
+
+    .job-info ul {
+      margin-bottom: 14px;
+      padding-left: 20px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .apply-now-btn {
+      display: inline-block;
+      background-color: #2ecc40;
+      color: #121212;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .apply-now-btn:hover {
+      background-color: #28a230;
+      color: white;
+    }
+
+    .apply-now-btn:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: #f44336;
+      font-size: 16px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo" onclick="window.location.href='home.html'">
+        <img src="../assets/images/kaam.png" alt="Kaam Ghar Logo" />
+        <h1>Kaam Ghar</h1>
+      </div>
+      <nav>
+        <a href="./home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="./update.html">Job Applied</a>
+      </nav>
+    </div>
+
+    <div class="navbar-right">
+      <div id="notificationBell" class="icon" title="Notifications">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="profile-pic" title="Profile" onclick="window.location.href='profile.html'">SD</div>
+
+      <div id="notificationDropdown" class="notification-dropdown">
+        <h3>Application Results</h3>
+        <!-- Notifications will be dynamically inserted here -->
+      </div>
+    </div>
+  </header>
+
+  <main id="jobDetails">
+    <h2 id="jobTitle">Loading...</h2>
+    <div class="job-info" id="jobInfo">
+      <p><strong>Location:</strong> <span id="jobLocation">Loading...</span></p>
+      <p><strong>Salary:</strong> <span id="jobSalary">Loading...</span></p>
+      <p><strong>Job Type:</strong> <span id="jobType">Loading...</span></p>
+      <p><strong>Industry:</strong> <span id="jobIndustry">Loading...</span></p>
+      <p><strong>Organization:</strong> <span id="jobOrganization">Loading...</span></p>
+      <p><strong>Credit Score:</strong> <span id="jobCreditScore">Loading...</span></p>
+      <p><strong>Job Description:</strong><br /><span id="jobDescription">Loading...</span></p>
+    </div>
+    <button id="applyNowBtn" class="apply-now-btn" disabled>Apply Now</button>
+  </main>
+
+  <script type="module">
+    import { getAuthenticatedUser, logout } from '../assets/js/auth.js';
+
+    window.logout = logout;
+
+    const jobTitle = document.getElementById('jobTitle');
+    const jobLocation = document.getElementById('jobLocation');
+    const jobSalary = document.getElementById('jobSalary');
+    const jobType = document.getElementById('jobType');
+    const jobIndustry = document.getElementById('jobIndustry');
+    const jobOrganization = document.getElementById('jobOrganization');
+    const jobCreditScore = document.getElementById('jobCreditScore');
+    const jobDescription = document.getElementById('jobDescription');
+    const applyNowBtn = document.getElementById('applyNowBtn');
+    const notificationBell = document.getElementById('notificationBell');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+
+    // Get job ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobId = urlParams.get('id');
+
+    // Function to fetch job details
+    const fetchJobDetails = async () => {
+      if (!jobId) {
+        jobTitle.textContent = 'Error';
+        document.getElementById('jobInfo').innerHTML = '<p class="error-message">No job ID provided.</p>';
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/jobs/${jobId}/`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        if (!response.ok) {
+          throw new Error(`Failed to fetch job details: ${response.statusText}`);
+        }
+        const job = await response.json();
+
+        // Render job details
+        jobTitle.textContent = `${job.title || 'Untitled Job'} - ${job.posted_by.full_name || job.company || 'Unknown Organization'}`;
+        jobLocation.textContent = job.location || 'Not specified';
+        jobSalary.textContent = job.salary || 'Not specified';
+        jobType.textContent = job.type || 'Not specified';
+        jobIndustry.textContent = job.posted_by.industry || 'Not specified';
+        jobOrganization.textContent = job.posted_by.full_name || job.company || 'Unknown Organization';
+        jobCreditScore.textContent = job.posted_by.credit_score || 'N/A';
+        jobDescription.textContent = job.description || 'No description available';
+
+        // Enable apply button if user is authenticated
+        if (token) {
+          applyNowBtn.disabled = false;
+        }
+      } catch (err) {
+        console.error('Error fetching job details:', err);
+        jobTitle.textContent = 'Error';
+        document.getElementById('jobInfo').innerHTML = '<p class="error-message">Failed to load job details. Please try again later.</p>';
+      }
+    };
+
+    // Function to handle job application
+    applyNowBtn.addEventListener('click', async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to apply for this job.');
+        window.location.href = '/login.html';
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/applications/apply/`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ job: jobId })  // ✅ Include job ID
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.detail || 'Failed to apply for job');
+        }
+
+        alert('Application submitted successfully!');
+        applyNowBtn.disabled = true;
+        applyNowBtn.textContent = 'Applied';
+      } catch (err) {
+        console.error('Error applying for job:', err);
+        alert(err.message || 'Failed to apply for job. Please try again.');
+      }
+    });
+
+
+    // Function to fetch notifications
+    const fetchNotifications = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        const response = await fetch('http://127.0.0.1:8000/notifications/', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Failed to fetch notifications');
+        const notifications = await response.json();
+        notificationDropdown.innerHTML = '<h3>Application Results</h3>';
+        if (notifications.length === 0) {
+          notificationDropdown.innerHTML += '<p style="padding: 12px 16px; color: #666;">No notifications.</p>';
+        } else {
+          notifications.forEach(notification => {
+            const item = document.createElement('div');
+            item.className = 'notification-item';
+            item.innerHTML = `
+              <span>${notification.company || 'Unknown'} - ${notification.job_title}</span>
+              <span class="${notification.status.toLowerCase()}">${notification.status}</span>
+            `;
+            notificationDropdown.appendChild(item);
+          });
+        }
+      } catch (err) {
+        console.error('Error fetching notifications:', err);
+        notificationDropdown.innerHTML = '<h3>Application Results</h3><p style="padding: 12px 16px; color: #666;">Failed to load notifications.</p>';
+      }
+    };
+
+    // Notification dropdown toggle
+    notificationBell.addEventListener('click', () => {
+      notificationDropdown.classList.toggle('active');
+      if (notificationDropdown.classList.contains('active')) {
+        fetchNotifications();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+      if (!notificationBell.contains(e.target) && !notificationDropdown.contains(e.target)) {
+        notificationDropdown.classList.remove('active');
+      }
+    });
+
+    // Fetch job details on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await getAuthenticatedUser();
+      if (!user) {
+        applyNowBtn.textContent = 'Log in to Apply';
+      }
+      fetchJobDetails();
+    });
+  </script>
+</body>
+
+</html>

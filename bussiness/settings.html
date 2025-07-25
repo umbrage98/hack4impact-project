@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings - Instagram Style</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    /* Reset & basics */
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Black Sidebar (left) */
+    .sidebar {
+      width: 80px;
+      background-color: #111;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      box-sizing: border-box;
+    }
+
+    .nav-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    .bottom-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 10px;
+    }
+
+    a i {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    a:hover i {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px white);
+    }
+
+    /* Settings Sidebar (middle) */
+    nav.settings-sidebar {
+      width: 270px;
+      background: #fefefe;
+      border-right: 1px solid #ddd;
+      padding: 20px 20px 20px 30px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      border-left: 1px solid #ddd;
+      /* fix: prevent shrinking */
+      flex-shrink: 0;
+    }
+
+    /* Each main topic group as card */
+    .settings-group {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+      padding: 15px 20px;
+      border-left: 3px solid transparent;
+    }
+
+    .settings-group+.settings-group {
+      border-top: 1px solid #ddd;
+    }
+
+    .settings-group h3 {
+      margin: 0 0 12px 0;
+      font-weight: 700;
+      color: #262626;
+      user-select: none;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .menu-item {
+      padding: 8px 10px;
+      font-weight: 600;
+      color: #262626;
+      border-left: 4px solid transparent;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+      user-select: none;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .menu-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .menu-item:hover {
+      background: #f0f0f0;
+    }
+
+    .menu-item.active {
+      border-left: 4px solid #0095f6;
+      background: #eaf5ff;
+      color: #0095f6;
+    }
+
+    .menu-item.logout {
+      color: red;
+      font-weight: 700;
+    }
+
+    /* Main content area (right) */
+    main.content {
+      flex: 1;
+      background: white;
+      padding: 30px 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main.content>section {
+      display: none;
+    }
+
+    main.content>section.active {
+      display: block;
+    }
+
+    main.content h3 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #262626;
+      margin-bottom: 15px;
+    }
+
+    main.content p {
+      color: #444;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    /* Form inside Your Profile */
+    form {
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #262626;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    input[type="file"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button.save-btn {
+      background-color: #0095f6;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button.save-btn:hover {
+      background-color: #007acc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Left black sidebar -->
+  <div class="sidebar">
+    <div class="nav-wrapper">
+      <div class="nav-icons">
+        <a href="dashboard.html" title="Home"><i class='bx bxs-home'></i></a>
+        <a href="jobpost.html" title="Job Post"><i class='bx bxs-plus-circle'></i></a>
+        <a href="viewjobs.html" title="View Own Job Post"><i class='bx bxs-file-doc'></i></a>
+        <a href="applications.html" title="Applications"><i class='bx bxs-inbox'></i></a>
+      </div>
+    </div>
+    <div class="bottom-icons">
+      <a href="settings.html" title="Settings"><i class='bx bxs-cog'></i></a>
+      <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
+    </div>
+  </div>
+
+  <!-- Settings Sidebar (middle) -->
+  <nav class="settings-sidebar" aria-label="Settings navigation">
+
+    <div class="settings-group">
+      <h3>Profile</h3>
+      <div class="menu-item active" data-target="your-profile">Your Profile</div>
+      <div class="menu-item" data-target="notifications">Notifications</div>
+    </div>
+
+    <div class="settings-group">
+      <h3>Privacy</h3>
+      <div class="menu-item" data-target="change-password">Change Password</div>
+    </div>
+
+    <div class="settings-group">
+      <h3>For Professionals</h3>
+      <div class="menu-item" data-target="credit-score">Your Credit Score</div>
+      <div class="menu-item" data-target="kaamghar-verified">Kaamghar Verified</div>
+    </div>
+
+    <div class="settings-group">
+      <h3>More Info and Support</h3>
+      <div class="menu-item" data-target="help">Help</div>
+      <div class="menu-item" data-target="privacy-center">Privacy Center</div>
+      <div class="menu-item" data-target="account-status">Account Status</div>
+      <div class="menu-item" data-target="about">About</div>
+    </div>
+
+
+
+    <div class="settings-group">
+      <h3>Updates</h3>
+      <div class="menu-item" data-target="update-kyc">Update KYC</div>
+      <div class="menu-item" data-target="your-cv">Your CV</div>
+    </div>
+
+    <div class="settings-group">
+      <h3>Login</h3>
+      <div class="menu-item logout" data-target="logout">Logout</div>
+    </div>
+
+  </nav>
+
+  <!-- Main Content (right) -->
+  <main class="content" tabindex="0">
+
+    <section id="your-profile" class="active" aria-label="Your Profile">
+      <h3>Update your Profile</h3>
+      <form id="profileForm">
+        <label for="full_name">Full Name*</label>
+        <input id="full_name" type="text" name="full_name" placeholder="Your full name" required />
+
+        <label for="username">Username*</label>
+        <input id="username" type="text" name="username" placeholder="Username" required />
+
+        <label for="email">Email Address*</label>
+        <input id="email" type="email" name="email" placeholder="Email" required />
+
+        <label for="phone_number">Phone Number</label>
+        <input id="phone_number" type="tel" name="phone_number" placeholder="Phone Number" />
+        <label for="address">Address</label>
+        <input id="address" type="text" name="address" placeholder="Address" />
+
+
+        <label for="profilePic">Profile Picture</label>
+        <input id="profilePic" name="profilePic" type="file" accept="image/*" />
+
+        <button class="save-btn" type="submit">Update Profile</button>
+      </form>
+    </section>
+
+    <section id="notifications" aria-label="Notifications">
+      <h3>Notifications</h3>
+      <form style="max-width: 400px; display: flex; flex-direction: column; gap: 15px;">
+        <label>
+          <input type="checkbox" name="emailNotifications" />
+          Email Notifications
+        </label>
+        <label>
+          <input type="checkbox" name="smsNotifications" />
+          SMS Notifications
+        </label>
+        <label>
+          <input type="checkbox" name="pushNotifications" />
+          Push Notifications
+        </label>
+        <button type="submit" class="save-btn">Save Settings</button>
+      </form>
+    </section>
+
+    <section id="change-password" aria-label="Change Password">
+      <h3>Change Password</h3>
+      <form style="max-width: 400px; display: flex; flex-direction: column; gap: 15px;">
+        <label for="currentPassword">Current Password*</label>
+        <input id="currentPassword" type="password" placeholder="Enter current password" required />
+
+        <label for="newPassword">New Password*</label>
+        <input id="newPassword" type="password" placeholder="Enter new password" required />
+
+        <label for="confirmPassword">Confirm New Password*</label>
+        <input id="confirmPassword" type="password" placeholder="Confirm new password" required />
+
+        <button type="submit" class="save-btn">Update Password</button>
+      </form>
+    </section>
+
+
+    <section id="credit-score" aria-label="Credit Score">
+      <h3>Credit Score (Honor Score)</h3>
+      <p>Your Honor Score reflects your reliability and performance on the platform based on your activity and feedback.
+      </p>
+
+      <div style="max-width: 400px; margin: 20px 0;">
+        <label for="honorScore" style="font-weight: 600; color: #262626;">Current Score:</label>
+        <div id="honorScore" style="
+      font-size: 48px;
+      font-weight: 700;
+      color: #0095f6;
+      margin-top: 5px;
+      user-select: none;
+    "></div>
+      </div>
+
+      <p style="max-width: 400px; color: #444; font-size: 14px;">
+        This score is calculated based on your job completion rate, client reviews, response time, and overall
+        professionalism. Maintain high standards to increase your Honor Score.
+      </p>
+
+      <button type="button" class="save-btn" style="max-width: 200px;">
+        View Detailed Report
+      </button>
+    </section>
+
+
+
+
+    <section id="kaamghar-verified" aria-label="Kaamghar Verified">
+      <h3>Kaamghar Verified</h3>
+      <p>
+        Get your account verified to build trust and show authenticity. Verified accounts receive a badge displayed next
+        to the account name.
+      </p>
+      <ul style="max-width: 400px; color: #444; font-size: 14px; margin-bottom: 20px;">
+        <li>✔️ Increased visibility in search and recommendations</li>
+        <li>✔️ Priority support</li>
+        <li>✔️ Access to exclusive business tools</li>
+      </ul>
+      <button type="button" class="save-btn" style="max-width: 200px;">
+        Request Verification
+      </button>
+    </section>
+
+
+    <section id="help" aria-label="Help">
+      <h3>Help Center</h3>
+      <p>If you need assistance, browse the topics below or contact our support team.</p>
+
+      <ul style="max-width: 500px; color: #444; font-size: 14px; margin-bottom: 20px; padding-left: 20px;">
+        <li><a href="#" style="color: #0095f6; text-decoration: none;">Getting Started Guide</a></li>
+        <li><a href="#" style="color: #0095f6; text-decoration: none;">Managing Your Account</a></li>
+        <li><a href="#" style="color: #0095f6; text-decoration: none;">Posting Jobs & Applications</a></li>
+        <li><a href="#" style="color: #0095f6; text-decoration: none;">Payment & Billing</a></li>
+        <li><a href="#" style="color: #0095f6; text-decoration: none;">Privacy & Security</a></li>
+      </ul>
+
+      <p style="max-width: 500px; font-size: 14px; color: #444;">
+        Still need help? Reach out to our support team at <a href="mailto:support@kaamghar.com"
+          style="color: #0095f6; text-decoration: none;">support@kaamghar.com</a> or call
+        <strong>+977-1-1234567</strong>.
+      </p>
+    </section>
+
+
+    <section id="privacy-center" aria-label="Privacy Center">
+      <h3>Privacy Center</h3>
+      <p>Your privacy is important to us. Here you can review and manage your privacy settings and learn how we protect
+        your data.</p>
+
+      <ul style="max-width: 500px; color: #444; font-size: 14px; margin-bottom: 20px; padding-left: 20px;">
+        <li><strong>Data Collection:</strong> We collect only essential data needed to improve your experience.</li>
+        <li><strong>Data Usage:</strong> Your data is used to personalize services and ensure platform security.</li>
+        <li><strong>Data Sharing:</strong> We do not sell your personal data to third parties.</li>
+        <li><strong>Account Control:</strong> You can update or delete your data anytime from your profile settings.
+        </li>
+        <li><strong>Cookies:</strong> We use cookies to optimize site performance and analyze traffic.</li>
+      </ul>
+
+      <p style="max-width: 500px; font-size: 14px; color: #444;">
+        For more detailed information, read our <a href="#" style="color: #0095f6; text-decoration: none;">Privacy
+          Policy</a>.
+      </p>
+    </section>
+    <section id="privacy-center" aria-label="Privacy Center">
+      <h3>Privacy Center</h3>
+      <p>Privacy policies here...</p>
+    </section>
+
+    <section id="account-status" aria-label="Account Status">
+      <h3>Account Status</h3>
+      <p>Your account is currently <strong>Active</strong>.</p>
+      <p style="max-width: 400px; color: #444; font-size: 14px;">
+        Status details:
+      <ul style="padding-left: 20px;">
+        <li>Last login: 2 days ago</li>
+        <li>Account created: January 15, 2023</li>
+        <li>Verified: Yes</li>
+        <li>Outstanding notifications: None</li>
+      </ul>
+      </p>
+      <button type="button" class="save-btn" style="max-width: 200px;">Update Account Info</button>
+    </section>
+
+
+    <section id="about" aria-label="About">
+      <h3>About Kaamghar</h3>
+      <p style="max-width: 500px; color: #444; font-size: 14px;">
+        Kaamghar is a trusted business platform connecting employers and professionals for seamless job posting,
+        applications, and management.
+        Our mission is to empower businesses with efficient tools and reliable support to grow and succeed.
+      </p>
+      <p style="max-width: 500px; color: #444; font-size: 14px;">
+        Version: 1.0.0<br />
+        &copy; 2025 Kaamghar. All rights reserved.
+      </p>
+    </section>
+
+
+    <section id="update-kyc" aria-label="Update KYC">
+      <h3>Update KYC (Know Your Customer)</h3>
+      <p>Please complete the following information to verify your business identity. This helps us maintain a secure and
+        trustworthy platform.</p>
+      <form style="max-width: 600px; display: flex; flex-direction: column; gap: 15px;" enctype="multipart/form-data"
+        method="post">
+
+        <label for="full_namee">Business Name*</label>
+        <input id="full_namee" name="full_namee" type="text" placeholder="Enter your registered business name"
+          required />
+
+        <label for="registration_number">Registration Number*</label>
+        <input id="registration_number" name="registration_number" type="text"
+          placeholder="Enter your business registration number" required />
+
+
+        <label for="id_number">Pan No.</label>
+        <input id="id_number" name="id_number" type="text" placeholder="Enter your PAN No" required />
+
+        <label for="issued_place">Issued Place</label>
+        <input id="issued_place" name="issued_place" type="text" placeholder="Enter your Issued place" required />
+
+        <label for="id_document">PAN Document*</label>
+        <input id="id_document" name="id_document" type="file" accept="image/*,.pdf" required />
+
+
+
+        <button type="submit" class="save-btn">Submit KYC</button>
+      </form>
+    </section>
+
+
+
+
+    <section id="your-cv" aria-label="Your CV">
+      <h3>Your CV</h3>
+      <p>Upload your CV as a photo or PDF file. You can preview it below after uploading.</p>
+
+      <form style="max-width: 500px; display: flex; flex-direction: column; gap: 15px;">
+        <label for="cvUpload">Upload CV (Image or PDF)*</label>
+        <input id="cvUpload" type="file" accept="image/*,application/pdf" required />
+
+        <div id="cvPreview" style="border: 1px solid #ccc; padding: 10px; border-radius: 6px; min-height: 150px;">
+          <p style="color: #888;">No CV uploaded yet.</p>
+        </div>
+
+        <button type="submit" class="save-btn">Save CV</button>
+      </form>
+    </section>
+
+
+
+    <script>
+      const cvUpload = document.getElementById('cvUpload');
+      const cvPreview = document.getElementById('cvPreview');
+
+      cvUpload.addEventListener('change', () => {
+        const file = cvUpload.files[0];
+        if (!file) {
+          cvPreview.innerHTML = '<p style="color: #888;">No CV uploaded yet.</p>';
+          return;
+        }
+
+        const fileType = file.type;
+        cvPreview.innerHTML = '';
+
+        if (fileType === 'application/pdf') {
+          // Show PDF preview using iframe
+          const iframe = document.createElement('iframe');
+          iframe.src = URL.createObjectURL(file);
+          iframe.style.width = '100%';
+          iframe.style.height = '300px';
+          iframe.style.border = 'none';
+          cvPreview.appendChild(iframe);
+        } else if (fileType.startsWith('image/')) {
+          // Show image preview
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.style.maxWidth = '100%';
+          img.style.maxHeight = '300px';
+          img.style.borderRadius = '6px';
+          cvPreview.appendChild(img);
+        } else {
+          cvPreview.innerHTML = '<p style="color: red;">Unsupported file type.</p>';
+        }
+      });
+    </script>
+
+    <section id="logout" aria-label="Logout">
+      <h3>Logout</h3>
+      <p>Are you sure you want to logout from your account?</p>
+      <div style="margin-top: 20px; max-width: 300px;">
+        <button id="confirmLogout" class="save-btn" style="margin-right: 10px;">Yes, Logout</button>
+        <button id="cancelLogout" class="save-btn" style="background-color: #ccc; color: #333;">Cancel</button>
+      </div>
+    </section>
+
+    <script>
+      document.getElementById('confirmLogout').addEventListener('click', () => {
+        // Redirect to logout URL or call logout function
+        localStorage.clear()
+        window.location.href = '../login.html';
+      });
+
+      document.getElementById('cancelLogout').addEventListener('click', () => {
+        // Return to default or previous settings page, e.g., Your Profile
+        document.querySelector('.menu-item.active').classList.remove('active');
+        const defaultItem = document.querySelector('.menu-item[data-target="your-profile"]');
+        defaultItem.classList.add('active');
+        document.querySelector('main.content > section.active').classList.remove('active');
+        document.getElementById('your-profile').classList.add('active');
+      });
+    </script>
+
+
+  </main>
+
+  <script>
+    const menuItems = document.querySelectorAll('.settings-sidebar .menu-item');
+    const sections = document.querySelectorAll('main.content > section');
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+
+        item.classList.add('active');
+        const targetId = item.getAttribute('data-target');
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+          targetSection.focus();
+        }
+      });
+    });
+  </script>
+
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent default anchor behavior
+      document.querySelector(".menu-item.logout[data-target='logout']").click();
+    });
+  </script>
+  <script type="module">
+    import { getAuthenticatedUser, logout } from '../assets/js/auth.js';
+
+    window.logout = logout;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem('token'); // or wherever you store the JWT
+
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/user/me/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch user");
+
+        const user = await res.json();
+        document.getElementById("full_name").value = user.full_name || "";
+        document.getElementById("username").value = user.username || "";
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("phone_number").value = user.phone_number || "";
+        document.getElementById("address").value = user.address || "";
+        document.getElementById('honorScore').innerText = user.credit_score ?? "N/A";
+
+
+        // Optionally display profile picture
+        if (user.profile_pic) {
+          const img = document.createElement("img");
+
+          // Prepend base URL if path is relative
+          const baseUrl = "http://127.0.0.1:8000";
+          const imagePath = user.profile_pic.startsWith("http")
+            ? user.profile_pic
+            : `${baseUrl}${user.profile_pic}`;
+
+          img.src = imagePath;
+          img.alt = "Profile";
+          img.style = "width: 100px; height: 100px; border-radius: 50%; margin-top: 10px;";
+          document.getElementById("profile_pic").insertAdjacentElement("afterend", img);
+        }
+
+
+      } catch (err) {
+        console.error("User fetch failed:", err);
+        alert("Session expired. Please login again.");
+        window.location.href = "/login.html";
+      }
+    });
+    const profileForm = document.getElementById('profileForm');
+
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("You are not authenticated.");
+        window.location.href = "/login.html";
+        return;
+      }
+
+      const formData = new FormData(profileForm);
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/user/profile/update/", {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData, // Let the browser handle multipart/form-data with FormData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error updating profile:", errorData);
+          alert("Failed to update profile. Please check the form.");
+          return;
+        }
+
+        const data = await response.json();
+        alert("Profile updated successfully!");
+        console.log("Updated profile:", data);
+
+      } catch (err) {
+        console.error("Error during update:", err);
+        alert("An error occurred. Please try again later.");
+      }
+    });
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      // Fetch and populate KYC details
+      try {
+        const kycRes = await fetch("http://127.0.0.1:8000/kyc/details/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (kycRes.ok) {
+          const kyc = await kycRes.json();
+          document.getElementById("full_namee").value = kyc.full_namee || "";
+          document.getElementById("registration_number").value = kyc.registration_number || "";
+          document.getElementById("id_number").value = kyc.id_number || "";
+          document.getElementById("issued_place").value = kyc.issued_place || "";
+
+          // Display PAN document if it exists
+          if (kyc.id_document) {
+            const baseUrl = "http://127.0.0.1:8000";
+            const docUrl = kyc.id_document.startsWith("http")
+              ? kyc.id_document
+              : `${baseUrl}${kyc.id_document}`;
+
+            const previewDiv = document.createElement("div");
+            previewDiv.style.marginTop = "10px";
+
+            if (docUrl.endsWith(".pdf")) {
+              const iframe = document.createElement("iframe");
+              iframe.src = docUrl;
+              iframe.style.width = "100%";
+              iframe.style.height = "200px";
+              previewDiv.appendChild(iframe);
+            } else {
+              const img = document.createElement("img");
+              img.src = docUrl;
+              img.style.maxWidth = "100%";
+              img.style.borderRadius = "6px";
+              previewDiv.appendChild(img);
+            }
+
+            document.getElementById("id_document").insertAdjacentElement("afterend", previewDiv);
+          }
+        } else if (kycRes.status === 404) {
+          console.log("No KYC record found, ready to submit new KYC.");
+        } else {
+          console.error("Failed to fetch KYC details:", kycRes.statusText);
+        }
+      } catch (kycErr) {
+        console.error("KYC fetch failed:", kycErr);
+      }
+    });
+
+    // Handle KYC form submission
+    document.querySelector('#update-kyc form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("You are not authenticated. Please log in.");
+        window.location.href = "/login.html";
+        return;
+      }
+
+      const kycForm = e.target;
+      const kycData = new FormData(kycForm);
+
+      try {
+        // Check if KYC exists
+        const kycRes = await fetch("http://127.0.0.1:8000/kyc/details/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        let apiUrl, method;
+
+        if (kycRes.ok) {
+          // KYC record exists, use update API
+          apiUrl = "http://127.0.0.1:8000/kyc/update/";
+          method = "PATCH";
+          console.log("KYC record exists, updating...");
+        } else if (kycRes.status === 404) {
+          // No KYC record, use create API
+          apiUrl = "http://127.0.0.1:8000/kyc/create/";
+          method = "POST";
+          console.log("No KYC record found, creating new...");
+        } else {
+          throw new Error(`Failed to check KYC status: ${kycRes.statusText}`);
+        }
+
+        // Submit or update KYC
+        const res = await fetch(apiUrl, {
+          method: method,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: kycData,
+        });
+
+        if (!res.ok) {
+          const errData = await res.json();
+          console.error(`${method} Error:`, errData);
+          alert(`Failed to ${method === "POST" ? "submit" : "update"} KYC. ${errData.detail || "Please check the form."}`);
+          return;
+        }
+
+        const data = await res.json();
+        alert(`KYC ${method === "POST" ? "submitted" : "updated"} successfully!`);
+        console.log("KYC Response:", data);
+
+        // Refresh the page to reflect updated data
+        window.location.reload();
+      } catch (err) {
+        console.error("KYC Submission/Update Failed:", err);
+        alert("Error processing KYC. Please try again later.");
+      }
+    });
+  </script>
+
+
+
+</body>
+
+</html>

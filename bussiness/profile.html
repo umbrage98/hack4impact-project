@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Business Profile</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       height: 100%;
@@ -75,11 +77,11 @@
       gap: 20px;
       padding-bottom: 10px;
     }
-    
+
     a i {
       transition: transform 0.3s ease, filter 0.3s ease;
     }
-    
+
     a:hover i {
       transform: scale(1.1);
       filter: drop-shadow(0 0 8px white);
@@ -89,7 +91,7 @@
     .profile-header {
       background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
       overflow: hidden;
       position: relative;
@@ -117,7 +119,7 @@
       border: 4px solid white;
       object-fit: cover;
       background-color: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .profile-info {
@@ -210,7 +212,7 @@
     .profile-section {
       background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       padding: 25px;
       margin-bottom: 20px;
     }
@@ -309,7 +311,7 @@
 
     .job-item:hover {
       border-color: #0077b5;
-      box-shadow: 0 2px 8px rgba(0,119,181,0.1);
+      box-shadow: 0 2px 8px rgba(0, 119, 181, 0.1);
     }
 
     .job-title {
@@ -360,6 +362,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="sidebar">
@@ -372,8 +375,8 @@
       </div>
     </div>
     <div class="bottom-icons">
-        <a href="settings.html" title="Settings"><i class='bx bxs-cog'></i></a>
-        <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
+      <a href="settings.html" title="Settings"><i class='bx bxs-cog'></i></a>
+      <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
     </div>
   </div>
 
@@ -390,11 +393,7 @@
 
     <!-- Search and Profile -->
     <div class="search-profile-container">
-      <input
-        type="text"
-        placeholder="Search..."
-        class="search-bar"
-      >
+      <input type="text" placeholder="Search..." class="search-bar">
       <a href="profile.html">
         <i class='bx bxs-user-circle profile-icon'></i>
       </a>
@@ -409,7 +408,7 @@
       <div class="profile-info">
         <h1 class="profile-name">CloudSystems Inc.</h1>
         <p class="profile-title">Cloud Infrastructure Solutions Provider</p>
-        
+
         <div class="profile-meta">
           <div class="meta-item">
             <i class='bx bx-map'></i>
@@ -428,7 +427,7 @@
             <span>Information Technology & Services</span>
           </div>
         </div>
-        
+
         <div class="profile-stats">
           <div class="stat-item">
             <span class="stat-number">245</span>
@@ -439,7 +438,7 @@
             <span class="stat-label">Followers</span>
           </div>
         </div>
-        
+
         <div class="profile-actions">
           <button class="action-btn primary-btn">Post a Job</button>
           <button class="action-btn secondary-btn">Edit Profile</button>
@@ -457,8 +456,12 @@
         </div>
       </div>
       <div class="about-text">
-        <p>CloudSystems is a leading provider of cloud infrastructure solutions, helping businesses of all sizes migrate, optimize, and manage their cloud environments. Founded in 2012, we've grown to serve over 1,200 clients worldwide with our innovative cloud technologies and expert services.</p>
-        <p>Our team of certified cloud architects and engineers specialize in AWS, Azure, and Google Cloud Platform implementations, delivering scalable, secure, and cost-effective solutions tailored to each client's unique needs.</p>
+        <p>CloudSystems is a leading provider of cloud infrastructure solutions, helping businesses of all sizes
+          migrate, optimize, and manage their cloud environments. Founded in 2012, we've grown to serve over 1,200
+          clients worldwide with our innovative cloud technologies and expert services.</p>
+        <p>Our team of certified cloud architects and engineers specialize in AWS, Azure, and Google Cloud Platform
+          implementations, delivering scalable, secure, and cost-effective solutions tailored to each client's unique
+          needs.</p>
       </div>
     </div>
 
@@ -471,7 +474,7 @@
           <span>Edit</span>
         </div>
       </div>
-      
+
       <div class="business-details">
         <div>
           <div class="detail-item">
@@ -513,7 +516,7 @@
           <span>Edit</span>
         </div>
       </div>
-      
+
       <div class="team-grid">
         <div class="team-member">
           <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="CEO" class="member-photo">
@@ -547,7 +550,7 @@
           <span>Edit</span>
         </div>
       </div>
-      
+
       <div class="job-list">
         <div class="job-item">
           <div class="job-title">Senior DevOps Engineer</div>
@@ -561,7 +564,7 @@
             <button class="action-btn secondary-btn" style="padding: 5px 10px; font-size: 13px;">Edit</button>
           </div>
         </div>
-        
+
         <div class="job-item">
           <div class="job-title">Cloud Solutions Architect</div>
           <div class="job-meta">
@@ -574,7 +577,7 @@
             <button class="action-btn secondary-btn" style="padding: 5px 10px; font-size: 13px;">Edit</button>
           </div>
         </div>
-        
+
         <div class="job-item">
           <div class="job-title">Frontend Developer</div>
           <div class="job-meta">
@@ -588,9 +591,10 @@
           </div>
         </div>
       </div>
-      
+
       <div style="text-align: center; margin-top: 15px;">
-        <a href="viewjobs.html" style="color: #0077b5; text-decoration: none; font-weight: 600;">View all job openings →</a>
+        <a href="viewjobs.html" style="color: #0077b5; text-decoration: none; font-weight: 600;">View all job openings
+          →</a>
       </div>
     </div>
   </div>
@@ -635,10 +639,12 @@
       logoutModal.style.display = 'none';
     });
 
-    confirmLogoutBtn.addEventListener('click', () => {
-      window.location.href = '/logout';
-    });
+      confirmLogoutBtn.addEventListener('click', () => {
+        localStorage.clear()
+        window.location.href = '../login.html';
+      });
   </script>
 
 </body>
+
 </html>

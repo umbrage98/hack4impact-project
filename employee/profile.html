@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile - Kaam Ghar</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .navbar-left .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .navbar-left .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar-left .logo h1 {
+      font-size: 22px;
+      color: #5cff5c;
+    }
+
+    .navbar-left nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .navbar-left nav a:hover {
+      background-color: #00bfa6;
+      color: #121212;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .navbar-right .icon {
+      cursor: pointer;
+      color: white;
+      font-size: 22px;
+    }
+
+    .navbar-right .icon:hover {
+      color: #00bfa6;
+    }
+
+    .navbar-right .profile-pic {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #00bfa6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #121212;
+      cursor: pointer;
+    }
+
+    .notification-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #1e1e1e;
+      border: 2px solid #00bfa6;
+      border-radius: 10px;
+      width: 320px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      display: none;
+    }
+
+    .notification-dropdown.active {
+      display: block;
+    }
+
+    .notification-dropdown h3 {
+      padding: 12px 16px;
+      border-bottom: 1px solid #00bfa6;
+      font-weight: 700;
+      color: #00bfa6;
+    }
+
+    .notification-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .accepted {
+      color: #4caf50;
+      font-weight: 700;
+    }
+
+    .rejected {
+      color: #f44336;
+      font-weight: 700;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background-color: #2a2a2a;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #2a2a2a;
+      transition: 0.3s;
+      color: #ccc;
+    }
+
+    .tab:hover {
+      background-color: #3a3a3a;
+    }
+
+    .tab.active {
+      background-color: #121212;
+      color: #00bfa6;
+      border-bottom: 3px solid #00bfa6;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 30px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #eee;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #333;
+      color: white;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background-color: #00bfa6;
+      border: none;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00a58c;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #00bfa6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="../assets/images/kaam.png" alt="Kaam Ghar Logo" />
+        <h1>Kaam Ghar</h1>
+      </div>
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="update.html">Job Applied</a>
+      </nav>
+    </div>
+    <div class="navbar-right">
+      <div id="notificationBell" class="icon" title="Notifications">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="profile-pic" onclick="window.location.href='profile.html'" title="Profile">SD</div>
+      <div id="notificationDropdown" class="notification-dropdown">
+        <h3>Application Results</h3>
+        <div class="notification-item"><span>TechNepal Pvt. Ltd.</span><span class="accepted">Accepted</span></div>
+        <div class="notification-item"><span>Innovate Solutions</span><span class="rejected">Rejected</span></div>
+        <div class="notification-item"><span>Global Softwares</span><span class="accepted">Accepted</span></div>
+        <div class="notification-item"><span>Creative Apps</span><span class="rejected">Rejected</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('profile')">Profile Update</div>
+      <div class="tab" onclick="switchTab('kyc')">KYC Update</div>
+    </div>
+
+    <div id="profile" class="tab-content active">
+      <h2>Update Profile</h2>
+      <form id="profileForm" method="POST" enctype="multipart/form-data">
+        <label for="full_name">Full Name</label>
+        <input type="text" id="full_name" name="full_name" placeholder="Enter your name" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your name" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="phone_number">Phone Number</label>
+        <input type="tel" id="phone_number" name="phone_number" placeholder="Enter your phone number">
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address">
+
+        <label for="profile_pic">Profile Picture</label>
+        <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+
+        <label for="education">Education</label>
+        <input type="text" id="education" name="education" placeholder="Enter your education">
+
+        <label for="experience">Experience</label>
+        <textarea id="experience" name="experience" placeholder="Enter your experience" rows="4"></textarea>
+
+        <label for="industry">Industry</label>
+        <input type="text" id="industry" name="industry" placeholder="Enter your industry">
+
+        <label for="skills">Skills</label>
+        <textarea id="skills" name="skills" placeholder="Enter your skills" rows="4"></textarea>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Enter your location">
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+
+    <div id="kyc" class="tab-content">
+      <h2>KYC Update</h2>
+      <form id="kycForm" enctype="multipart/form-data">
+        <label for="full_namee">Full Name</label>
+        <input type="text" id="full_namee" name="full_namee" placeholder="Enter your full name" required>
+
+        <label for="id_number">Citizenship/ID Number</label>
+        <input type="text" id="id_number" name="id_number" placeholder="Enter citizenship/ID number" required>
+
+        <label for="id_document">Upload Document</label>
+        <input type="file" id="id_document" name="id_document" accept=".pdf,.jpg,.jpeg,.png" required>
+
+        <label for="issued_place">Issue Place</label>
+        <input type="text" id="issued_place" name="issued_place" placeholder="Enter issuing place">
+
+
+
+        <button type="submit">Submit KYC</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    const bell = document.getElementById('notificationBell');
+    const dropdown = document.getElementById('notificationDropdown');
+
+    bell.addEventListener('click', () => {
+      dropdown.classList.toggle('active');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
+    // Basic client-side validation
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+      const email = document.getElementById('email').value;
+      const fullName = document.getElementById('full_name').value;
+      if (!email.includes('@') || fullName.trim() === '') {
+        e.preventDefault();
+        alert('Please enter a valid email and full name.');
+      }
+    });
+
+    document.getElementById('kycForm').addEventListener('submit', (e) => {
+      const idNumber = document.getElementById('id_number').value;
+      const fullNamee = document.getElementById('full_namee').value;
+      if (idNumber.trim() === '' || fullNamee.trim() === '') {
+        e.preventDefault();
+        alert('Please enter a valid ID number and full name.');
+      }
+    });
+
+  </script>
+  <script type="module">
+    import { getAuthenticatedUser, logout } from '../assets/js/auth.js';
+
+    window.logout = logout;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem('token'); // or wherever you store the JWT
+
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/user/me/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch user");
+
+        const user = await res.json();
+        document.getElementById("full_name").value = user.full_name || "";
+        document.getElementById("username").value = user.username || "";
+        document.getElementById("email").value = user.email || "";
+        document.getElementById("phone_number").value = user.phone_number || "";
+        document.getElementById("address").value = user.address || "";
+        document.getElementById("education").value = user.education || "";
+        document.getElementById("experience").value = user.experience || "";
+        document.getElementById("industry").value = user.industry || "";
+        document.getElementById("skills").value = user.skills || "";
+        document.getElementById("location").value = user.location || "";
+
+
+
+        // Optionally display profile picture
+        if (user.profile_pic) {
+          const img = document.createElement("img");
+
+          // Prepend base URL if path is relative
+          const baseUrl = "http://127.0.0.1:8000";
+          const imagePath = user.profile_pic.startsWith("http")
+            ? user.profile_pic
+            : `${baseUrl}${user.profile_pic}`;
+
+          img.src = imagePath;
+          img.alt = "Profile";
+          img.style = "width: 100px; height: 100px; border-radius: 50%; margin-top: 10px;";
+          document.getElementById("profile_pic").insertAdjacentElement("afterend", img);
+        }
+
+
+      } catch (err) {
+        console.error("User fetch failed:", err);
+        alert("Session expired. Please login again.");
+        window.location.href = "/login.html";
+      }
+    });
+    const profileForm = document.getElementById('profileForm');
+
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("You are not authenticated.");
+        window.location.href = "/login.html";
+        return;
+      }
+
+      const formData = new FormData(profileForm);
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/user/profile/update/", {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData, // Let the browser handle multipart/form-data with FormData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error updating profile:", errorData);
+          alert("Failed to update profile. Please check the form.");
+          return;
+        }
+
+        const data = await response.json();
+        alert("Profile updated successfully!");
+        console.log("Updated profile:", data);
+
+      } catch (err) {
+        console.error("Error during update:", err);
+        alert("An error occurred. Please try again later.");
+      }
+    });
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      // Fetch and populate KYC details
+      try {
+        const kycRes = await fetch("http://127.0.0.1:8000/kyc/details/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (kycRes.ok) {
+          const kyc = await kycRes.json();
+          document.getElementById("full_namee").value = kyc.full_namee || "";
+          document.getElementById("id_number").value = kyc.id_number || "";
+          document.getElementById("issued_place").value = kyc.issued_place || "";
+
+          // Display PAN document if it exists
+          if (kyc.id_document) {
+            const baseUrl = "http://127.0.0.1:8000";
+            const docUrl = kyc.id_document.startsWith("http")
+              ? kyc.id_document
+              : `${baseUrl}${kyc.id_document}`;
+
+            const previewDiv = document.createElement("div");
+            previewDiv.style.marginTop = "10px";
+
+            if (docUrl.endsWith(".pdf")) {
+              const iframe = document.createElement("iframe");
+              iframe.src = docUrl;
+              iframe.style.width = "100%";
+              iframe.style.height = "200px";
+              previewDiv.appendChild(iframe);
+            } else {
+              const img = document.createElement("img");
+              img.src = docUrl;
+              img.style.maxWidth = "100%";
+              img.style.borderRadius = "6px";
+              previewDiv.appendChild(img);
+            }
+
+            document.getElementById("id_document").insertAdjacentElement("afterend", previewDiv);
+          }
+        } else if (kycRes.status === 404) {
+          console.log("No KYC record found, ready to submit new KYC.");
+        } else {
+          console.error("Failed to fetch KYC details:", kycRes.statusText);
+        }
+      } catch (kycErr) {
+        console.error("KYC fetch failed:", kycErr);
+      }
+    });
+
+    // Handle KYC form submission
+    document.getElementById('kycForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("You are not authenticated. Please log in.");
+        window.location.href = "/login.html";
+        return;
+      }
+
+      const kycForm = e.target;
+      const kycData = new FormData(kycForm);
+
+      try {
+        const kycRes = await fetch("http://127.0.0.1:8000/kyc/details/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        let apiUrl, method;
+
+        if (kycRes.ok) {
+          apiUrl = "http://127.0.0.1:8000/kyc/update/";
+          method = "PATCH";
+          console.log("KYC record exists, updating...");
+        } else if (kycRes.status === 404) {
+          apiUrl = "http://127.0.0.1:8000/kyc/create/";
+          method = "POST";
+          console.log("No KYC record found, creating new...");
+        } else {
+          throw new Error(`Failed to check KYC status: ${kycRes.statusText}`);
+        }
+
+        const res = await fetch(apiUrl, {
+          method: method,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: kycData,
+        });
+
+        if (!res.ok) {
+          const errData = await res.json();
+          console.error(`${method} Error:`, errData);
+          alert(`Failed to ${method === "POST" ? "submit" : "update"} KYC. ${errData.detail || "Please check the form."}`);
+          return;
+        }
+
+        const data = await res.json();
+        alert(`KYC ${method === "POST" ? "submitted" : "updated"} successfully!`);
+        console.log("KYC Response:", data);
+
+        window.location.reload();
+      } catch (err) {
+        console.error("KYC Submission/Update Failed:", err);
+        alert("Error processing KYC. Please try again later.");
+      }
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uploaded Jobs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f4f4f4;
+      min-height: 100vh;
+    }
+
+    aside {
+      width: 80px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    aside a {
+      color: #fff;
+      font-size: 24px;
+      margin: 20px 0;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    aside a:hover,
+    aside a.active {
+      background: #333;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    header {
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .job-list {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .job-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .job-item:last-child {
+      border-bottom: none;
+    }
+
+    .job-info {
+      flex: 1;
+    }
+
+    .job-title {
+      font-weight: 600;
+      font-size: 18px;
+      color: #222;
+      margin-bottom: 5px;
+    }
+
+    .job-company {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .job-location {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .job-actions button {
+      padding: 8px 16px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .job-actions button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <aside>
+    <div class="logo"><img src="../assets/images/kaam.png" alt="" height="100%" width="100%"
+        style="border-radius: 50%;">
+    </div>
+    <a href="dashboard.html" title="Home"><i>🏠</i></a>
+    <a href="jobform.html" title="Post Job"><i>➕</i></a>
+    <a href="uloadedjobs.html" title="My Jobs" class="active"><i>📋</i></a>
+    <a href="application.html" title="Applications"><i>📨</i></a>
+    <a href="settings.html" title="Settings"><i>⚙️</i></a>
+  </aside>
+  <main>
+    <header>
+      <h1>Uploaded Jobs</h1>
+      <p>Manage your posted job listings below</p>
+    </header>
+
+    <section class="job-list">
+      <article class="job-item">
+        <div class="job-info">
+          <div class="job-title">Frontend Developer</div>
+          <div class="job-company">TechWave Pvt. Ltd.</div>
+          <div class="job-location">Kathmandu, Nepal</div>
+        </div>
+        <div class="job-actions">
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </article>
+      <article class="job-item">
+        <div class="job-info">
+          <div class="job-title">Graphic Designer</div>
+          <div class="job-company">Creative Minds</div>
+          <div class="job-location">Pokhara, Nepal</div>
+        </div>
+        <div class="job-actions">
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </article>
+      <article class="job-item">
+        <div class="job-info">
+          <div class="job-title">Software Developer</div>
+          <div class="job-company">Innovatech</div>
+          <div class="job-location">Lalitpur, Nepal</div>
+        </div>
+        <div class="job-actions">
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>

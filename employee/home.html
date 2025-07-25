@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Listing - Kaam Ghar</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .navbar-left .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .navbar-left .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar-left .logo h1 {
+      font-size: 22px;
+      color: #5cff5c;
+      user-select: none;
+    }
+
+    .navbar-left nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    .navbar-left nav a:hover {
+      background-color: #00bfa6;
+      color: #121212;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .navbar-right .icon {
+      cursor: pointer;
+      position: relative;
+      color: white;
+      font-size: 22px;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .navbar-right .icon:hover {
+      color: #00bfa6;
+    }
+
+    .navbar-right .profile-pic {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #00bfa6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #121212;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .navbar-right .profile-pic:hover {
+      background-color: #00a58c;
+    }
+
+    .notification-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: #1e1e1e;
+      border: 2px solid #00bfa6;
+      border-radius: 10px;
+      width: 320px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      display: none;
+      z-index: 20;
+    }
+
+    .notification-dropdown.active {
+      display: block;
+    }
+
+    .notification-dropdown h3 {
+      padding: 12px 16px;
+      border-bottom: 1px solid #00bfa6;
+      font-weight: 700;
+      color: #00bfa6;
+      user-select: none;
+    }
+
+    .notification-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: default;
+      user-select: none;
+    }
+
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+
+    .accepted {
+      color: #4caf50;
+      font-weight: 700;
+    }
+
+    .rejected {
+      color: #f44336;
+      font-weight: 700;
+    }
+
+    .search-bar-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      padding: 10px 16px;
+      border: 1px solid #00bfa6;
+      border-radius: 25px;
+      outline: none;
+      background-color: #1e1e1e;
+      color: white;
+      font-size: 16px;
+      width: 100%;
+      max-width: 500px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .search-bar:focus {
+      box-shadow: 0 0 8px #00bfa6;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 40px 60px;
+      background-color: #121212;
+    }
+
+    main h2 {
+      text-align: center;
+      color: #00bfa6;
+      margin-bottom: 30px;
+      letter-spacing: 1.2px;
+      user-select: none;
+    }
+
+    .job-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .job-card {
+      background-color: #000000;
+      border-radius: 14px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+      position: relative;
+    }
+
+    .job-card h3 {
+      margin-bottom: 12px;
+      color: #5cff5c;
+      font-size: 24px;
+      user-select: none;
+    }
+
+    .job-card p {
+      margin-bottom: 14px;
+      font-size: 17px;
+      user-select: none;
+    }
+
+    .credit-apply {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .credit {
+      font-weight: 700;
+      font-size: 18px;
+      background-color: #222;
+      padding: 8px 16px;
+      border-radius: 20px;
+      user-select: none;
+    }
+
+    .apply-btn {
+      background-color: #2ecc40;
+      color: #121212;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .apply-btn:hover {
+      background-color: #28a230;
+      color: white;
+    }
+
+    .no-jobs-message {
+      font-size: 18px;
+      color: #666;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="logo" onclick="window.location.href='./home.html'">
+        <img src="../assets/images/kaam.png" alt="Kaam Ghar Logo" />
+        <h1>Kaam Ghar</h1>
+      </div>
+      <nav>
+        <a href="./home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="./update.html">Job Applied</a>
+      </nav>
+    </div>
+
+    <div class="navbar-right">
+      <div id="notificationBell" class="icon" title="Notifications">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="profile-pic" title="Profile" onclick="window.location.href='profile.html'">SD</div>
+
+      <div id="notificationDropdown" class="notification-dropdown">
+        <h3>Application Results</h3>
+        <!-- Notifications will be dynamically inserted here -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h2>Available Jobs</h2>
+    <div class="search-bar-container">
+      <input type="text" placeholder="Search jobs by title, company, or location..." class="search-bar"
+        id="searchBar" />
+    </div>
+    <div class="job-container" id="jobContainer">
+      <!-- Job posts will be dynamically inserted here -->
+    </div>
+  </main>
+
+  <script type="module">
+    import { getAuthenticatedUser, logout } from '../assets/js/auth.js';
+
+    window.logout = logout;
+
+    const jobContainer = document.getElementById('jobContainer');
+    const searchBar = document.getElementById('searchBar');
+    const notificationBell = document.getElementById('notificationBell');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+
+    // Function to render job posts
+    const renderJobPosts = (jobs) => {
+      jobContainer.innerHTML = '';
+      if (jobs.length === 0) {
+        jobContainer.innerHTML = '<p class="no-jobs-message">No jobs found.</p>';
+        return;
+      }
+
+      jobs.forEach(job => {
+        const jobCard = document.createElement('div');
+        jobCard.className = 'job-card';
+        jobCard.setAttribute('data-job-id', job.id);
+        jobCard.innerHTML = `
+          <h3>${job.posted_by.full_name || job.company || 'Unknown Organization'}</h3>
+          <p><strong>Job Title:</strong> ${job.title || 'Untitled Job'}</p>
+          <p><strong>Salary:</strong> ${job.salary || 'Not specified'}</p>
+          <p><strong>Industry:</strong> ${job.posted_by.industry || 'Not specified'}</p>
+          <p><strong>Location:</strong> ${job.posted_by.location || job.location || 'Not specified'}</p>
+          <div class="credit-apply">
+            <div class="credit">Credit: ${job.posted_by.credit_score || 'N/A'}</div>
+            <a href="jbpage.html?id=${job.id}" class="apply-btn">Apply</a>
+          </div>
+        `;
+        // Add click event listener to the entire card
+        jobCard.addEventListener('click', (e) => {
+          // Prevent navigation if clicking the Apply button
+          if (e.target.classList.contains('apply-btn')) {
+            e.stopPropagation(); // Allow the Apply button's default behavior (link navigation)
+            return;
+          }
+          window.location.href = `jbpage.html?id=${job.id}`;
+        });
+        jobContainer.appendChild(jobCard);
+      });
+    };
+
+    // Function to fetch job posts
+    const fetchJobDetails = async (searchQuery = '') => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to view job posts.');
+        window.location.href = '/login.html';
+        return;
+      }
+
+      try {
+        const url = searchQuery
+          ? `http://127.0.0.1:8000/jobs/list/?search=${encodeURIComponent(searchQuery)}`
+          : 'http://127.0.0.1:8000/jobs/list/';
+        const response = await fetch(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch jobs: ${response.statusText}`);
+        }
+
+        const jobs = await response.json();
+        renderJobPosts(jobs);
+      } catch (err) {
+        console.error('Error fetching jobs:', err);
+        jobContainer.innerHTML = '<p class="no-jobs-message">Failed to load jobs. Please try again later.</p>';
+      }
+    };
+
+    // Function to fetch notifications (placeholder)
+    const fetchNotifications = async () => {
+      const token = localStorage.getItem('token');
+      try {
+        // Replace with actual notification API endpoint
+        const response = await fetch('http://127.0.0.1:8000/notifications/', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Failed to fetch notifications');
+        const notifications = await response.json();
+        notificationDropdown.innerHTML = '<h3>Application Results</h3>';
+        notifications.forEach(notification => {
+          const item = document.createElement('div');
+          item.className = 'notification-item';
+          item.innerHTML = `
+            <span>${notification.company || 'Unknown'}</span>
+            <span class="${notification.status.toLowerCase()}">${notification.status}</span>
+          `;
+          notificationDropdown.appendChild(item);
+        });
+      } catch (err) {
+        console.error('Error fetching notifications:', err);
+        notificationDropdown.innerHTML += '<p style="padding: 12px 16px; color: #666;">Failed to load notifications.</p>';
+      }
+    };
+
+    // Handle search functionality
+    searchBar.addEventListener('input', () => {
+      const query = searchBar.value.trim();
+      fetchJobDetails(query);
+    });
+
+    // Notification dropdown toggle
+    notificationBell.addEventListener('click', () => {
+      notificationDropdown.classList.toggle('active');
+      if (notificationDropdown.classList.contains('active')) {
+        fetchNotifications();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+      if (!notificationBell.contains(e.target) && !notificationDropdown.contains(e.target)) {
+        notificationDropdown.classList.remove('active');
+      }
+    });
+
+    // Fetch job posts on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await getAuthenticatedUser();
+      if (!user) {
+        window.location.href = '/login.html';
+        return;
+      }
+      fetchJobDetails();
+    });
+  </script>
+</body>
+
+</html>
