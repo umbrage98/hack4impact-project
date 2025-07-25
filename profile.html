@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Profile</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 80px;
+      background-color: #111;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      box-sizing: border-box;
+      position: fixed;
+    }
+
+    .main-content {
+      flex: 1;
+      margin-left: 80px;
+      overflow-y: auto;
+      height: 100vh;
+      padding: 30px 50px;
+      box-sizing: border-box;
+    }
+
+    .nav-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #00d9ff;
+    }
+
+    .bottom-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 10px;
+    }
+    
+    a i {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    a:hover i {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px white);
+    }
+
+    /* Business Profile Header Styles */
+    .profile-header {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-banner {
+      height: 200px;
+      background: linear-gradient(135deg, #0077b5, #004182);
+      position: relative;
+    }
+
+    .profile-picture-container {
+      position: absolute;
+      bottom: -50px;
+      left: 50px;
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      border: 4px solid white;
+      object-fit: cover;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .profile-info {
+      padding: 30px 50px 30px;
+      margin-top: 50px;
+    }
+
+    .profile-name {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 5px;
+    }
+
+    .profile-title {
+      font-size: 18px;
+      color: #666;
+      margin: 0 0 15px;
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #666;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .action-btn {
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .primary-btn {
+      background-color: #0077b5;
+      color: white;
+      border: none;
+    }
+
+    .primary-btn:hover {
+      background-color: #006097;
+    }
+
+    .secondary-btn {
+      background-color: white;
+      color: #0077b5;
+      border: 1px solid #0077b5;
+    }
+
+    .secondary-btn:hover {
+      background-color: #f0f7fc;
+    }
+
+    /* Profile Sections */
+    .profile-section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .edit-btn {
+      color: #666;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .about-text {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Business Details */
+    .business-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .detail-item {
+      margin-bottom: 15px;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      color: #333;
+    }
+
+    /* Team Members */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .team-member {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .member-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .member-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .member-role {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Job Openings */
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .job-item {
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    .job-item:hover {
+      border-color: #0077b5;
+      box-shadow: 0 2px 8px rgba(0,119,181,0.1);
+    }
+
+    .job-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .job-meta {
+      display: flex;
+      gap: 15px;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .job-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Search and profile positioning */
+    .search-profile-container {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .search-bar {
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+      font-size: 15px;
+      width: 400px;
+    }
+
+    .search-bar:focus {
+      box-shadow: 0 0 8px gray;
+    }
+
+    .profile-icon {
+      font-size: 42px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="nav-wrapper">
+      <div class="nav-icons">
+        <a href="dashboard.html" title="Home"><i class='bx bxs-home'></i></a>
+        <a href="jobpost.html" title="Job Post"><i class='bx bxs-plus-circle'></i></a>
+        <a href="viewjobs.html" title="View Own Job Post"><i class='bx bxs-file-doc'></i></a>
+        <a href="applications.html" title="Applications"><i class='bx bxs-inbox'></i></a>
+      </div>
+    </div>
+    <div class="bottom-icons">
+        <a href="settings.html" title="Settings"><i class='bx bxs-cog'></i></a>
+        <a href="#" id="logoutBtn" title="Logout"><i class='bx bxs-log-out'></i></a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- Header Text -->
+    <div>
+      <h1 style="margin: 0; font-weight: 1500; font-size: 25px; color: #111; line-height: 1;">
+        BUSINESS PROFILE
+      </h1>
+      <h3 style="margin: 10px 0 20px 0; font-weight: 600; font-size: 15px; color: #111; line-height: 1;">
+        Manage your company profile
+      </h3>
+    </div>
+
+    <!-- Search and Profile -->
+    <div class="search-profile-container">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="search-bar"
+      >
+      <a href="profile.html">
+        <i class='bx bxs-user-circle profile-icon'></i>
+      </a>
+    </div>
+
+    <!-- Business Profile Header -->
+    <div class="profile-header">
+      <div class="profile-banner"></div>
+      <div class="profile-picture-container">
+        <img src="https://logo.clearbit.com/cloudsystems.com" alt="Company Logo" class="profile-picture">
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name">CloudSystems Inc.</h1>
+        <p class="profile-title">Cloud Infrastructure Solutions Provider</p>
+        
+        <div class="profile-meta">
+          <div class="meta-item">
+            <i class='bx bx-map'></i>
+            <span>San Francisco, California</span>
+          </div>
+          <div class="meta-item">
+            <i class='bx bx-globe'></i>
+            <a href="https://cloudsystems.com" style="color: #0077b5; text-decoration: none;">cloudsystems.com</a>
+          </div>
+          <div class="meta-item">
+            <i class='bx bx-building'></i>
+            <span>201-500 employees</span>
+          </div>
+          <div class="meta-item">
+            <i class='bx bx-category'></i>
+            <span>Information Technology & Services</span>
+          </div>
+        </div>
+        
+        <div class="profile-stats">
+          <div class="stat-item">
+            <span class="stat-number">245</span>
+            <span class="stat-label">Jobs Posted</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5.2k</span>
+            <span class="stat-label">Followers</span>
+          </div>
+        </div>
+        
+        <div class="profile-actions">
+          <button class="action-btn primary-btn">Post a Job</button>
+          <button class="action-btn secondary-btn">Edit Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">About</h2>
+        <div class="edit-btn">
+          <i class='bx bx-pencil'></i>
+          <span>Edit</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>CloudSystems is a leading provider of cloud infrastructure solutions, helping businesses of all sizes migrate, optimize, and manage their cloud environments. Founded in 2012, we've grown to serve over 1,200 clients worldwide with our innovative cloud technologies and expert services.</p>
+        <p>Our team of certified cloud architects and engineers specialize in AWS, Azure, and Google Cloud Platform implementations, delivering scalable, secure, and cost-effective solutions tailored to each client's unique needs.</p>
+      </div>
+    </div>
+
+    <!-- Business Details Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">Company Details</h2>
+        <div class="edit-btn">
+          <i class='bx bx-pencil'></i>
+          <span>Edit</span>
+        </div>
+      </div>
+      
+      <div class="business-details">
+        <div>
+          <div class="detail-item">
+            <div class="detail-label">Company Type</div>
+            <div class="detail-value">Private</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Founded</div>
+            <div class="detail-value">2012</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Specialties</div>
+            <div class="detail-value">Cloud Migration, DevOps, Infrastructure as Code, Kubernetes, CI/CD</div>
+          </div>
+        </div>
+        <div>
+          <div class="detail-item">
+            <div class="detail-label">Headquarters</div>
+            <div class="detail-value">535 Mission St, San Francisco, CA 94105</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Contact Email</div>
+            <div class="detail-value">info@cloudsystems.com</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Phone</div>
+            <div class="detail-value">(415) 555-0199</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">Leadership Team</h2>
+        <div class="edit-btn">
+          <i class='bx bx-pencil'></i>
+          <span>Edit</span>
+        </div>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="CEO" class="member-photo">
+          <div class="member-name">Michael Johnson</div>
+          <div class="member-role">CEO & Founder</div>
+        </div>
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="CTO" class="member-photo">
+          <div class="member-name">Sarah Chen</div>
+          <div class="member-role">Chief Technology Officer</div>
+        </div>
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="CFO" class="member-photo">
+          <div class="member-name">David Wilson</div>
+          <div class="member-role">Chief Financial Officer</div>
+        </div>
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="VP" class="member-photo">
+          <div class="member-name">Emily Rodriguez</div>
+          <div class="member-role">VP of Engineering</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Job Openings -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">Current Job Openings (12)</h2>
+        <div class="edit-btn">
+          <i class='bx bx-pencil'></i>
+          <span>Edit</span>
+        </div>
+      </div>
+      
+      <div class="job-list">
+        <div class="job-item">
+          <div class="job-title">Senior DevOps Engineer</div>
+          <div class="job-meta">
+            <span><i class='bx bx-map'></i> San Francisco, CA</span>
+            <span><i class='bx bx-time'></i> Full-time</span>
+            <span><i class='bx bx-dollar'></i> $140,000 - $180,000</span>
+          </div>
+          <div class="job-actions">
+            <button class="action-btn primary-btn" style="padding: 5px 10px; font-size: 13px;">View Applicants</button>
+            <button class="action-btn secondary-btn" style="padding: 5px 10px; font-size: 13px;">Edit</button>
+          </div>
+        </div>
+        
+        <div class="job-item">
+          <div class="job-title">Cloud Solutions Architect</div>
+          <div class="job-meta">
+            <span><i class='bx bx-map'></i> Remote</span>
+            <span><i class='bx bx-time'></i> Full-time</span>
+            <span><i class='bx bx-dollar'></i> $150,000 - $200,000</span>
+          </div>
+          <div class="job-actions">
+            <button class="action-btn primary-btn" style="padding: 5px 10px; font-size: 13px;">View Applicants</button>
+            <button class="action-btn secondary-btn" style="padding: 5px 10px; font-size: 13px;">Edit</button>
+          </div>
+        </div>
+        
+        <div class="job-item">
+          <div class="job-title">Frontend Developer</div>
+          <div class="job-meta">
+            <span><i class='bx bx-map'></i> San Francisco, CA</span>
+            <span><i class='bx bx-time'></i> Full-time</span>
+            <span><i class='bx bx-dollar'></i> $120,000 - $150,000</span>
+          </div>
+          <div class="job-actions">
+            <button class="action-btn primary-btn" style="padding: 5px 10px; font-size: 13px;">View Applicants</button>
+            <button class="action-btn secondary-btn" style="padding: 5px 10px; font-size: 13px;">Edit</button>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 15px;">
+        <a href="viewjobs.html" style="color: #0077b5; text-decoration: none; font-weight: 600;">View all job openings →</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="logoutModal" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  ">
+    <div style="
+      background: white;
+      padding: 25px 30px;
+      border-radius: 8px;
+      max-width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    ">
+      <p style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">
+        Are you sure you want to logout?
+      </p>
+      <button id="confirmLogoutBtn" class="save-btn" style="margin-right: 12px;">Logout</button>
+      <button id="cancelLogoutBtn" class="save-btn" style="background: #ccc; color: #333;">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+    const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+
+    logoutBtn.addEventListener('click', e => {
+      e.preventDefault();
+      logoutModal.style.display = 'flex';
+    });
+
+    cancelLogoutBtn.addEventListener('click', () => {
+      logoutModal.style.display = 'none';
+    });
+
+    confirmLogoutBtn.addEventListener('click', () => {
+      window.location.href = '/logout';
+    });
+  </script>
+
+</body>
+</html>
